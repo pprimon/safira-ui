@@ -1,0 +1,319 @@
+import { Canvas, Controls, Meta } from '@storybook/blocks';
+import * as AlertStories from './Alert.stories';
+
+<Meta of={AlertStories} />
+
+# Componente Alert
+
+O componente `Alert` é utilizado para exibir mensagens de feedback ao usuário, como notificações de sucesso, erro, aviso ou informação.
+
+
+## Importação
+
+```typescript
+import { Alert } from '@safira-ui/components';
+```
+
+---
+
+## Playground
+
+<Canvas of={AlertStories.Default} />
+
+## Propriedades
+
+<Controls of={AlertStories.Default} />
+
+---
+
+## Severidades
+
+O componente `Alert` possui quatro tipos de severidade que alteram automaticamente a cor e o ícone:
+
+<Canvas of={AlertStories.AllSeverities} />
+
+<table>
+  <thead>
+    <tr>
+      <th>Severidade</th>
+      <th>Uso recomendado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>info</code>
+      </td>
+      <td>Informações gerais e dicas</td>
+    </tr>
+    <tr>
+      <td>
+        <code>success</code>
+      </td>
+      <td>Confirmação de ações bem-sucedidas</td>
+    </tr>
+    <tr>
+      <td>
+        <code>warning</code>
+      </td>
+      <td>Avisos que requerem atenção</td>
+    </tr>
+    <tr>
+      <td>
+        <code>error</code>
+      </td>
+      <td>Erros e falhas que precisam de correção</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Alert severity="success" title="Sucesso">
+  Operação concluída com êxito.
+</Alert>
+
+<Alert severity="info" title="Informação">
+  Dados atualizados automaticamente.
+</Alert>
+
+<Alert severity="warning" title="Atenção">
+  Verifique as configurações antes de continuar.
+</Alert>
+
+<Alert severity="error" title="Erro">
+  Falha na conexão com o servidor.
+</Alert>
+```
+
+---
+
+## Variantes
+
+O componente `Alert` possui três variantes visuais: `standard`, `filled` e `outlined`.
+
+<Canvas of={AlertStories.Variants} />
+
+### Standard
+
+A variante `standard` exibe o alerta com fundo colorido sutil e borda esquerda destacada.
+
+```tsx
+<Alert severity="success" variant="standard">
+  Alert padrão com fundo colorido sutil
+</Alert>
+```
+
+### Filled
+
+A variante `filled` exibe o alerta com fundo sólido na cor correspondente à severidade.
+
+```tsx
+<Alert severity="success" variant="filled">
+  Alert preenchido com cor sólida
+</Alert>
+```
+
+### Outlined
+
+A variante `outlined` exibe o alerta com borda colorida e fundo transparente.
+
+```tsx
+<Alert severity="success" variant="outlined">
+  Alert com borda colorida
+</Alert>
+```
+
+---
+
+## Com Título
+
+Adicione a propriedade `title` para exibir um título em destaque no alerta.
+
+<Canvas of={AlertStories.WithTitle} />
+
+```tsx
+<Alert severity="success" title="Sucesso!">
+  Seu perfil foi atualizado com sucesso.
+</Alert>
+```
+
+---
+
+## Com Botão de Fechar
+
+Use `closable` para permitir que o usuário feche o alerta. Combine com `onClose` para executar uma ação ao fechar.
+
+<Canvas of={AlertStories.Closable} />
+
+```tsx
+<Alert
+  severity="info"
+  title="Alert Fechável"
+  closable
+  visible={visible}
+  onClose={() => setVisible(false)}
+>
+  Este alert pode ser fechado clicando no X.
+</Alert>
+```
+
+---
+
+## Ícone Customizado
+
+Use a propriedade `icon` para substituir o ícone padrão da severidade por um ícone personalizado.
+
+<Canvas of={AlertStories.CustomIcon} />
+
+```tsx
+import { Star, Favorite } from "@mui/icons-material";
+
+<Alert severity="info" title="Alert com Ícone Customizado" icon={<Star />}>
+  Este alert usa um ícone de estrela personalizado.
+</Alert>
+
+<Alert severity="success" title="Favorito Adicionado" icon={<Favorite />}>
+  Item adicionado aos seus favoritos!
+</Alert>
+```
+
+---
+
+## Sem Ícone
+
+Use `showIcon={false}` para ocultar o ícone do alerta.
+
+<Canvas of={AlertStories.WithoutIcon} />
+
+```tsx
+<Alert severity="info" title="Alert sem Ícone" showIcon={false}>
+  Este alert não exibe nenhum ícone.
+</Alert>
+```
+
+---
+
+## Conteúdo Longo
+
+O Alert se adapta automaticamente a conteúdos mais extensos, mantendo a legibilidade.
+
+<Canvas of={AlertStories.LongContent} />
+
+```tsx
+<Alert severity="warning" title="Aviso Detalhado" closable>
+  Este é um alert com conteúdo mais longo para demonstrar como o componente
+  se comporta com textos extensos. O alert mantém sua formatação e 
+  legibilidade mesmo com múltiplas linhas de texto.
+</Alert>
+```
+
+---
+
+## Exemplo Interativo
+
+Um exemplo com criação e remoção dinâmica de alertas.
+
+<Canvas of={AlertStories.Interactive} />
+
+```tsx
+const [alerts, setAlerts] = useState([]);
+
+const addAlert = (severity, message) => {
+  const newAlert = { id: Date.now(), severity, message };
+  setAlerts((prev) => [...prev, newAlert]);
+  
+  // Auto-remove após 5 segundos
+  setTimeout(() => {
+    setAlerts((prev) => prev.filter((alert) => alert.id !== newAlert.id));
+  }, 5000);
+};
+
+return (
+  <div>
+    <Button onClick={() => addAlert("success", "Operação realizada!")}>
+      Adicionar Sucesso
+    </Button>
+    
+    {alerts.map((alert) => (
+      <Alert
+        key={alert.id}
+        severity={alert.severity}
+        closable
+        onClose={() => removeAlert(alert.id)}
+      >
+        {alert.message}
+      </Alert>
+    ))}
+  </div>
+);
+```
+
+---
+
+## Acessibilidade
+
+O componente `Alert` implementa automaticamente as melhores práticas de acessibilidade do MUI:
+
+### Comportamento Padrão
+
+- O componente utiliza `role="alert"` automaticamente, o que faz com que leitores de tela anunciem o conteúdo imediatamente.
+- Para alertas que aparecem dinamicamente, o MUI aplica `aria-live="assertive"` internamente.
+
+### Pontos Críticos
+
+<table>
+  <thead>
+    <tr>
+      <th>Atributo</th>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>role="alert"</code>
+      </td>
+      <td>
+        Aplicado automaticamente pelo MUI. Anuncia o conteúdo para leitores de
+        tela.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>aria-live</code>
+      </td>
+      <td>
+        Alertas usam <code>assertive</code> por padrão para interromper a
+        leitura atual.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>aria-label</code>
+      </td>
+      <td>
+        Aplicado automaticamente no botão de fechar com descrição "Fechar alerta".
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Exemplo com Acessibilidade
+
+```tsx
+<Alert
+  severity="success"
+  title="Formulário enviado com sucesso"
+  closable
+  onClose={() => setShowAlert(false)}
+>
+  Você receberá uma confirmação por e-mail em instantes.
+</Alert>
+```
+
+### Boas Práticas
+
+1. **Títulos descritivos**: Use títulos claros que expliquem a natureza do alerta.
+2. **Não abuse de alertas**: Muitos alertas simultâneos podem confundir usuários de leitores de tela.
+3. **Alertas críticos**: Para erros que impedem o uso do sistema, considere usar `severity="error"` com `variant="filled"`.
+4. **Animações suaves**: O componente usa `Collapse` para animações que não causam desconforto visual.

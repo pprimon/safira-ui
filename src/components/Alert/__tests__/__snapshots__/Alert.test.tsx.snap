@@ -1,0 +1,438 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Alert Component Snapshots matches snapshot for all severity types: alert-error 1`] = `
+<div
+  class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-qr6njo-MuiCollapse-root"
+  style="min-height: 0px;"
+>
+  <div
+    class="MuiCollapse-wrapper MuiCollapse-vertical css-1x6hinx-MuiCollapse-wrapper"
+  >
+    <div
+      class="MuiCollapse-wrapperInner MuiCollapse-vertical css-1i4ywhz-MuiCollapse-wrapperInner"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorError MuiAlert-standardError MuiAlert-standard css-1gw13kh-MuiPaper-root-MuiAlert-root"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon css-1mbpkk9-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="ErrorIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-2h2zm0-4h-2V7h2z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-nv90g-MuiAlert-message"
+        >
+          <div
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom MuiAlertTitle-root css-b1f67y-MuiTypography-root-MuiAlertTitle-root"
+          >
+            error Alert
+          </div>
+          This is a 
+          error
+           message
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert Component Snapshots matches snapshot for all severity types: alert-info 1`] = `
+<div
+  class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-qr6njo-MuiCollapse-root"
+  style="min-height: 0px;"
+>
+  <div
+    class="MuiCollapse-wrapper MuiCollapse-vertical css-1x6hinx-MuiCollapse-wrapper"
+  >
+    <div
+      class="MuiCollapse-wrapperInner MuiCollapse-vertical css-1i4ywhz-MuiCollapse-wrapperInner"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-17zs3t5-MuiPaper-root-MuiAlert-root"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon css-1mbpkk9-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="InfoIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-6h2zm0-8h-2V7h2z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-nv90g-MuiAlert-message"
+        >
+          <div
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom MuiAlertTitle-root css-b1f67y-MuiTypography-root-MuiAlertTitle-root"
+          >
+            info Alert
+          </div>
+          This is a 
+          info
+           message
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert Component Snapshots matches snapshot for all severity types: alert-success 1`] = `
+<div
+  class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-qr6njo-MuiCollapse-root"
+  style="min-height: 0px;"
+>
+  <div
+    class="MuiCollapse-wrapper MuiCollapse-vertical css-1x6hinx-MuiCollapse-wrapper"
+  >
+    <div
+      class="MuiCollapse-wrapperInner MuiCollapse-vertical css-1i4ywhz-MuiCollapse-wrapperInner"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorSuccess MuiAlert-standardSuccess MuiAlert-standard css-11ohw5t-MuiPaper-root-MuiAlert-root"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon css-1mbpkk9-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="CheckCircleIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-nv90g-MuiAlert-message"
+        >
+          <div
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom MuiAlertTitle-root css-b1f67y-MuiTypography-root-MuiAlertTitle-root"
+          >
+            success Alert
+          </div>
+          This is a 
+          success
+           message
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert Component Snapshots matches snapshot for all severity types: alert-warning 1`] = `
+<div
+  class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-qr6njo-MuiCollapse-root"
+  style="min-height: 0px;"
+>
+  <div
+    class="MuiCollapse-wrapper MuiCollapse-vertical css-1x6hinx-MuiCollapse-wrapper"
+  >
+    <div
+      class="MuiCollapse-wrapperInner MuiCollapse-vertical css-1i4ywhz-MuiCollapse-wrapperInner"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorWarning MuiAlert-standardWarning MuiAlert-standard css-11pddp7-MuiPaper-root-MuiAlert-root"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon css-1mbpkk9-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="WarningIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-nv90g-MuiAlert-message"
+        >
+          <div
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom MuiAlertTitle-root css-b1f67y-MuiTypography-root-MuiAlertTitle-root"
+          >
+            warning Alert
+          </div>
+          This is a 
+          warning
+           message
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert Component Snapshots matches snapshot for all variants: alert-filled 1`] = `
+<div
+  class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-qr6njo-MuiCollapse-root"
+  style="min-height: 0px;"
+>
+  <div
+    class="MuiCollapse-wrapper MuiCollapse-vertical css-1x6hinx-MuiCollapse-wrapper"
+  >
+    <div
+      class="MuiCollapse-wrapperInner MuiCollapse-vertical css-1i4ywhz-MuiCollapse-wrapperInner"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-filledInfo MuiAlert-filled css-1ubs50r-MuiPaper-root-MuiAlert-root"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon css-1mbpkk9-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="InfoIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-6h2zm0-8h-2V7h2z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-nv90g-MuiAlert-message"
+        >
+          filled
+           variant alert
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert Component Snapshots matches snapshot for all variants: alert-outlined 1`] = `
+<div
+  class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-qr6njo-MuiCollapse-root"
+  style="min-height: 0px;"
+>
+  <div
+    class="MuiCollapse-wrapper MuiCollapse-vertical css-1x6hinx-MuiCollapse-wrapper"
+  >
+    <div
+      class="MuiCollapse-wrapperInner MuiCollapse-vertical css-1i4ywhz-MuiCollapse-wrapperInner"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-outlinedInfo MuiAlert-outlined css-zwc2z7-MuiPaper-root-MuiAlert-root"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon css-1mbpkk9-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="InfoIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-6h2zm0-8h-2V7h2z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-nv90g-MuiAlert-message"
+        >
+          outlined
+           variant alert
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert Component Snapshots matches snapshot for all variants: alert-standard 1`] = `
+<div
+  class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-qr6njo-MuiCollapse-root"
+  style="min-height: 0px;"
+>
+  <div
+    class="MuiCollapse-wrapper MuiCollapse-vertical css-1x6hinx-MuiCollapse-wrapper"
+  >
+    <div
+      class="MuiCollapse-wrapperInner MuiCollapse-vertical css-1i4ywhz-MuiCollapse-wrapperInner"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-17zs3t5-MuiPaper-root-MuiAlert-root"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon css-1mbpkk9-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="InfoIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-6h2zm0-8h-2V7h2z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-nv90g-MuiAlert-message"
+        >
+          standard
+           variant alert
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert Component Snapshots matches snapshot for basic alert 1`] = `
+<div
+  class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-qr6njo-MuiCollapse-root"
+  style="min-height: 0px;"
+>
+  <div
+    class="MuiCollapse-wrapper MuiCollapse-vertical css-1x6hinx-MuiCollapse-wrapper"
+  >
+    <div
+      class="MuiCollapse-wrapperInner MuiCollapse-vertical css-1i4ywhz-MuiCollapse-wrapperInner"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-17zs3t5-MuiPaper-root-MuiAlert-root"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon css-1mbpkk9-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="InfoIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-6h2zm0-8h-2V7h2z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-nv90g-MuiAlert-message"
+        >
+          Basic alert message
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert Component Snapshots matches snapshot with close button 1`] = `
+<div
+  class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-qr6njo-MuiCollapse-root"
+  style="min-height: 0px;"
+>
+  <div
+    class="MuiCollapse-wrapper MuiCollapse-vertical css-1x6hinx-MuiCollapse-wrapper"
+  >
+    <div
+      class="MuiCollapse-wrapperInner MuiCollapse-vertical css-1i4ywhz-MuiCollapse-wrapperInner"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorWarning MuiAlert-standardWarning MuiAlert-standard css-11pddp7-MuiPaper-root-MuiAlert-root"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon css-1mbpkk9-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="WarningIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-nv90g-MuiAlert-message"
+        >
+          <div
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom MuiAlertTitle-root css-b1f67y-MuiTypography-root-MuiAlertTitle-root"
+          >
+            Closable Alert
+          </div>
+          This alert can be closed
+        </div>
+        <div
+          class="MuiAlert-action css-3gd17j-MuiAlert-action"
+        >
+          <button
+            aria-label="Fechar alerta"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1z11ba9-MuiButtonBase-root-MuiIconButton-root"
+            data-testid="alert-close-button"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
+              data-testid="CloseIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
