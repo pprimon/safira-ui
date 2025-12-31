@@ -59,9 +59,6 @@ export const designTokens = {
   },
 };
 
-/**
- * Opções base compartilhadas entre temas claro e escuro
- */
 const getBaseThemeOptions = (mode: "light" | "dark"): ThemeOptions => ({
   palette: {
     mode,
@@ -83,10 +80,6 @@ const getBaseThemeOptions = (mode: "light" | "dark"): ThemeOptions => ({
   },
 });
 
-/**
- * Customizações de componentes que funcionam com qualquer tema
- * Os temas de cada componente são importados de seus respectivos arquivos
- */
 const getComponentOverrides = (theme: Theme, mode: "light" | "dark"): ThemeOptions["components"] => {
   const alertOverrides = getAlertThemeOverrides(theme, mode);
   const badgeOverrides = getBadgeThemeOverrides(theme, mode);
