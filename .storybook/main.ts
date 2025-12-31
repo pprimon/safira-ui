@@ -17,10 +17,10 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {}
   },
+  staticDirs: ["../src/assets"],
   typescript: {
     check: false,
-    // TESTE: Desabilitando react-docgen-typescript para investigar o erro
-    reactDocgen: false,
+    
   },
 };
 export default config;
