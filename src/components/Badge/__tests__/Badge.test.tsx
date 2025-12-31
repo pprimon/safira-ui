@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { Badge } from "../Badge";
 import { lightTheme } from "../../../theme";
@@ -305,4 +306,3 @@ describe("Badge Component", () => {
     });
   });
 });
-

@@ -1,0 +1,400 @@
+import { Canvas, Controls, Meta } from '@storybook/blocks';
+import * as BadgeStories from './Badge.stories';
+
+<Meta of={BadgeStories} />
+
+# Componente Badge
+
+O componente `Badge` é utilizado para exibir indicadores visuais como contadores de notificações, status de usuários ou rótulos destacados.
+
+## Importação
+
+```typescript
+import { Badge } from '@safira-ui/components';
+```
+
+---
+
+## Playground
+
+<Canvas of={BadgeStories.Default} />
+
+## Propriedades
+
+<Controls of={BadgeStories.Default} />
+
+---
+
+## Cores
+
+O componente `Badge` suporta sete cores predefinidas que se adaptam ao design system:
+
+<Canvas of={BadgeStories.Colors} />
+
+<table>
+  <thead>
+    <tr>
+      <th>Cor</th>
+      <th>Uso recomendado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>primary</code>
+      </td>
+      <td>Ações principais e destaques gerais</td>
+    </tr>
+    <tr>
+      <td>
+        <code>secondary</code>
+      </td>
+      <td>Ações secundárias e informações complementares</td>
+    </tr>
+    <tr>
+      <td>
+        <code>accent</code>
+      </td>
+      <td>Destaques especiais e chamadas de atenção</td>
+    </tr>
+    <tr>
+      <td>
+        <code>success</code>
+      </td>
+      <td>Status positivos e confirmações</td>
+    </tr>
+    <tr>
+      <td>
+        <code>error</code>
+      </td>
+      <td>Alertas, erros e notificações urgentes</td>
+    </tr>
+    <tr>
+      <td>
+        <code>warning</code>
+      </td>
+      <td>Avisos e ações que requerem atenção</td>
+    </tr>
+    <tr>
+      <td>
+        <code>info</code>
+      </td>
+      <td>Informações gerais e dicas</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Badge content={5} color="primary">
+  <IconButton><Notifications /></IconButton>
+</Badge>
+
+<Badge content={3} color="error">
+  <IconButton><Mail /></IconButton>
+</Badge>
+
+<Badge content={1} color="success">
+  <IconButton><Message /></IconButton>
+</Badge>
+```
+
+---
+
+## Tamanhos
+
+O componente `Badge` possui três tamanhos: `small`, `medium` e `large`.
+
+<Canvas of={BadgeStories.Sizes} />
+
+```tsx
+<Badge content={5} size="small">
+  <IconButton size="small"><Notifications /></IconButton>
+</Badge>
+
+<Badge content={5} size="medium">
+  <IconButton><Notifications /></IconButton>
+</Badge>
+
+<Badge content={5} size="large">
+  <IconButton size="large"><Notifications /></IconButton>
+</Badge>
+```
+
+---
+
+## Variantes
+
+O componente `Badge` possui três variantes visuais: `standard`, `dot` e `outlined`.
+
+<Canvas of={BadgeStories.Variants} />
+
+### Standard
+
+A variante `standard` exibe o badge com fundo sólido e conteúdo (número ou texto).
+
+```tsx
+<Badge content={5} variant="standard">
+  <IconButton><Notifications /></IconButton>
+</Badge>
+```
+
+### Dot
+
+A variante `dot` exibe apenas um pequeno ponto indicador, ideal para status de presença.
+
+```tsx
+<Badge variant="dot" color="success">
+  <Avatar>U</Avatar>
+</Badge>
+```
+
+### Outlined
+
+A variante `outlined` exibe o badge com borda colorida e fundo transparente.
+
+```tsx
+<Badge content={3} variant="outlined">
+  <IconButton><Message /></IconButton>
+</Badge>
+```
+
+---
+
+## Badge Dot para Status
+
+Use a variante `dot` para indicar status de usuários ou elementos, como online/offline.
+
+<Canvas of={BadgeStories.DotBadges} />
+
+```tsx
+<Badge variant="dot" color="success">
+  <Avatar>ON</Avatar>
+</Badge>
+
+<Badge variant="dot" color="error">
+  <Avatar>OFF</Avatar>
+</Badge>
+
+<Badge variant="dot" color="warning">
+  <Avatar>AFK</Avatar>
+</Badge>
+```
+
+---
+
+## Posições
+
+O badge pode ser posicionado em qualquer canto do elemento filho usando `anchorOrigin`.
+
+<Canvas of={BadgeStories.Positions} />
+
+```tsx
+<Badge content={5} anchorOrigin={{ vertical: "top", horizontal: "right" }}>
+  <Button>Superior Direita</Button>
+</Badge>
+
+<Badge content={5} anchorOrigin={{ vertical: "top", horizontal: "left" }}>
+  <Button>Superior Esquerda</Button>
+</Badge>
+
+<Badge content={5} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+  <Button>Inferior Direita</Button>
+</Badge>
+
+<Badge content={5} anchorOrigin={{ vertical: "bottom", horizontal: "left" }}>
+  <Button>Inferior Esquerda</Button>
+</Badge>
+```
+
+---
+
+## Badge Standalone
+
+Use `standalone` para renderizar o badge sem um elemento filho, útil para rótulos e tags.
+
+<Canvas of={BadgeStories.Standalone} />
+
+```tsx
+<Badge content="Novo" color="accent" standalone />
+<Badge content="Beta" color="info" variant="outlined" standalone />
+<Badge content="Pro" color="success" standalone />
+<Badge content={99} color="primary" standalone />
+```
+
+---
+
+## Badges com Texto
+
+O badge pode exibir texto ao invés de números para criar rótulos destacados.
+
+<Canvas of={BadgeStories.TextBadges} />
+
+```tsx
+<Badge content="Novo">
+  <Button>Recurso Novo</Button>
+</Badge>
+
+<Badge content="Beta" color="warning" variant="outlined">
+  <Button>Versão Beta</Button>
+</Badge>
+
+<Badge content="Pro" color="success">
+  <Button>Plano Pro</Button>
+</Badge>
+```
+
+---
+
+## Com Números
+
+Use números para contadores de notificações. O `max` define o limite exibido.
+
+<Canvas of={BadgeStories.WithNumbers} />
+
+```tsx
+<Badge content={23}>
+  <IconButton><Mail /></IconButton>
+</Badge>
+
+<Badge content={100} max={99}>
+  <IconButton><Notifications /></IconButton>
+</Badge>
+
+<Badge content={1000} max={999}>
+  <IconButton><Favorite /></IconButton>
+</Badge>
+```
+
+---
+
+## Exibindo Zero
+
+Por padrão, o badge não é exibido quando o valor é 0. Use `showZero` para forçar a exibição.
+
+<Canvas of={BadgeStories.WithZero} />
+
+```tsx
+{/* Badge visível com valor 0 */}
+<Badge content={0} showZero>
+  <IconButton><Notifications /></IconButton>
+</Badge>
+
+{/* Badge oculto quando valor é 0 (padrão) */}
+<Badge content={0} showZero={false}>
+  <IconButton><Mail /></IconButton>
+</Badge>
+```
+
+---
+
+## Visibilidade
+
+Use `invisible` para controlar a visibilidade do badge programaticamente.
+
+<Canvas of={BadgeStories.Invisible} />
+
+```tsx
+<Badge content={5} invisible={false}>
+  <IconButton><Notifications /></IconButton>
+</Badge>
+
+<Badge content={5} invisible={true}>
+  <IconButton><Mail /></IconButton>
+</Badge>
+```
+
+---
+
+## Exemplo Real
+
+Um exemplo de uso real do badge em uma barra de navegação.
+
+<Canvas of={BadgeStories.RealWorldExample} />
+
+```tsx
+const NavBar = () => (
+  <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+    {/* Notificações */}
+    <Badge content={12} color="error">
+      <IconButton><Notifications /></IconButton>
+    </Badge>
+
+    {/* Mensagens */}
+    <Badge content={3} color="primary">
+      <IconButton><Mail /></IconButton>
+    </Badge>
+
+    {/* Carrinho */}
+    <Badge content={7} color="accent">
+      <IconButton><ShoppingCart /></IconButton>
+    </Badge>
+
+    {/* Status online */}
+    <Badge variant="dot" color="success">
+      <Avatar>U</Avatar>
+    </Badge>
+
+    {/* Badge standalone */}
+    <Badge content="Novo" color="info" standalone />
+  </div>
+);
+```
+
+---
+
+## Acessibilidade
+
+O componente `Badge` segue as melhores práticas de acessibilidade:
+
+### Pontos Críticos
+
+<table>
+  <thead>
+    <tr>
+      <th>Atributo</th>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>aria-label</code>
+      </td>
+      <td>
+        Considere adicionar um aria-label ao elemento pai descrevendo a contagem.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>role</code>
+      </td>
+      <td>
+        O badge é puramente visual. Para leitores de tela, a informação deve estar no elemento pai.
+      </td>
+    </tr>
+    <tr>
+      <td>Contraste</td>
+      <td>
+        Todas as cores do badge são projetadas para manter um contraste adequado com o texto.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Exemplo com Acessibilidade
+
+```tsx
+<IconButton aria-label="12 notificações não lidas">
+  <Badge content={12} color="error">
+    <Notifications />
+  </Badge>
+</IconButton>
+```
+
+### Boas Práticas
+
+1. **Descrição clara**: Para badges com contadores, adicione um aria-label descritivo no elemento pai.
+2. **Não dependa apenas da cor**: Use a variante `dot` com contexto visual adicional para indicar status.
+3. **Limite o uso de badges**: Muitos badges simultâneos podem sobrecarregar a interface e confundir o usuário.
+4. **Feedback visual**: O badge tem animações sutis de hover para melhorar a experiência do usuário.
+

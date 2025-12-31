@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Badge } from "../src/components/Badge";
-import { Button } from "../src/components/Button";
+import { Badge } from "./Badge";
+import { Button } from "../Button";
 import { IconButton, Avatar } from "@mui/material";
 import {
   Notifications,
@@ -12,16 +12,10 @@ import {
 } from "@mui/icons-material";
 
 const meta: Meta<typeof Badge> = {
-  title: "Components/Badge",
   component: Badge,
+  title: "Components/Badge",
   parameters: {
     layout: "centered",
-    docs: {
-      description: {
-        component:
-          "Indicador visual moderno para notificações, contadores e status. Pode ser usado como overlay em outros elementos ou standalone.",
-      },
-    },
   },
   decorators: [
     (Story) => (
@@ -30,10 +24,9 @@ const meta: Meta<typeof Badge> = {
       </div>
     ),
   ],
-  tags: ["autodocs"],
   argTypes: {
     color: {
-      control: { type: "select" },
+      control: "select",
       options: [
         "primary",
         "secondary",
@@ -43,41 +36,64 @@ const meta: Meta<typeof Badge> = {
         "warning",
         "info",
       ],
-      description: "Cor do badge",
+      description: "Define a cor do badge.",
+      table: { category: "Aparência", defaultValue: { summary: "primary" } },
     },
     size: {
-      control: { type: "select" },
+      control: "select",
       options: ["small", "medium", "large"],
-      description: "Tamanho do badge",
+      description: "Define o tamanho do badge.",
+      table: { category: "Aparência", defaultValue: { summary: "medium" } },
     },
     variant: {
-      control: { type: "select" },
+      control: "select",
       options: ["standard", "dot", "outlined"],
-      description: "Variante visual do badge",
+      description: "Define o estilo visual do badge.",
+      table: { category: "Aparência", defaultValue: { summary: "standard" } },
+    },
+    content: {
+      control: "text",
+      description: "Conteúdo do badge (número, texto ou ícone).",
+      table: { category: "Conteúdo" },
     },
     max: {
-      control: { type: "number" },
-      description: "Número máximo a ser exibido (ex: 99+)",
+      control: "number",
+      description: "Número máximo a ser exibido. Valores acima mostram 'max+'.",
+      table: { category: "Conteúdo", defaultValue: { summary: "99" } },
     },
     showZero: {
       control: "boolean",
-      description: "Se deve mostrar zero",
+      description: "Define se o badge deve ser exibido quando o valor é zero.",
+      table: { category: "Comportamento", defaultValue: { summary: "false" } },
     },
     invisible: {
       control: "boolean",
-      description: "Se o badge está invisível",
+      description: "Define se o badge está invisível.",
+      table: { category: "Comportamento", defaultValue: { summary: "false" } },
     },
     standalone: {
       control: "boolean",
-      description: "Badge standalone (sem children)",
+      description: "Renderiza o badge sem um elemento filho (standalone).",
+      table: { category: "Comportamento", defaultValue: { summary: "false" } },
     },
+  },
+  args: {
+    color: "primary",
+    size: "medium",
+    variant: "standard",
+    content: 5,
+    max: 99,
+    showZero: false,
+    invisible: false,
+    standalone: false,
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Badge>;
 
 export const Default: Story = {
+  name: "Padrão",
   args: {
     content: 5,
     children: (
@@ -89,6 +105,7 @@ export const Default: Story = {
 };
 
 export const WithNumbers: Story = {
+  name: "Com Números",
   render: () => (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
       <Badge content={1}>
@@ -125,6 +142,7 @@ export const WithNumbers: Story = {
 };
 
 export const Colors: Story = {
+  name: "Cores",
   render: () => (
     <div
       style={{
@@ -180,6 +198,7 @@ export const Colors: Story = {
 };
 
 export const Sizes: Story = {
+  name: "Tamanhos",
   render: () => (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
       <Badge content={5} size="small">
@@ -204,6 +223,7 @@ export const Sizes: Story = {
 };
 
 export const Variants: Story = {
+  name: "Variantes",
   render: () => (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
       <Badge content={5} variant="standard">
@@ -228,6 +248,7 @@ export const Variants: Story = {
 };
 
 export const DotBadges: Story = {
+  name: "Badges Dot (Status)",
   render: () => (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
       <Badge variant="dot" color="success">
@@ -250,37 +271,39 @@ export const DotBadges: Story = {
 };
 
 export const Positions: Story = {
+  name: "Posições",
   render: () => (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
       <Badge
         content={5}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Button>Top Right</Button>
+        <Button>Superior Direita</Button>
       </Badge>
 
       <Badge content={5} anchorOrigin={{ vertical: "top", horizontal: "left" }}>
-        <Button>Top Left</Button>
+        <Button>Superior Esquerda</Button>
       </Badge>
 
       <Badge
         content={5}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
-        <Button>Bottom Right</Button>
+        <Button>Inferior Direita</Button>
       </Badge>
 
       <Badge
         content={5}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        <Button>Bottom Left</Button>
+        <Button>Inferior Esquerda</Button>
       </Badge>
     </div>
   ),
 };
 
 export const Standalone: Story = {
+  name: "Standalone",
   render: () => (
     <div
       style={{
@@ -301,6 +324,7 @@ export const Standalone: Story = {
 };
 
 export const TextBadges: Story = {
+  name: "Badges com Texto",
   render: () => (
     <div
       style={{
@@ -330,6 +354,7 @@ export const TextBadges: Story = {
 };
 
 export const WithZero: Story = {
+  name: "Exibindo Zero",
   render: () => (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
       <Badge content={0} showZero>
@@ -348,6 +373,7 @@ export const WithZero: Story = {
 };
 
 export const Invisible: Story = {
+  name: "Visibilidade",
   render: () => (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
       <Badge content={5} invisible={false}>
@@ -366,6 +392,7 @@ export const Invisible: Story = {
 };
 
 export const RealWorldExample: Story = {
+  name: "Exemplo Real",
   render: () => (
     <div
       style={{
@@ -400,7 +427,7 @@ export const RealWorldExample: Story = {
 
       {/* Status online */}
       <Badge variant="dot" color="success">
-        <Avatar src="/api/placeholder/32/32">U</Avatar>
+        <Avatar>U</Avatar>
       </Badge>
 
       {/* Favoritos */}
@@ -412,6 +439,41 @@ export const RealWorldExample: Story = {
 
       {/* Badge standalone */}
       <Badge content="Novo" color="info" standalone />
+    </div>
+  ),
+};
+
+export const AllColors: Story = {
+  name: "Todas as Cores",
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+        <Badge content={1} color="primary" standalone />
+        <Badge content={2} color="secondary" standalone />
+        <Badge content={3} color="accent" standalone />
+        <Badge content={4} color="success" standalone />
+        <Badge content={5} color="error" standalone />
+        <Badge content={6} color="warning" standalone />
+        <Badge content={7} color="info" standalone />
+      </div>
+      <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+        <Badge content={1} color="primary" variant="outlined" standalone />
+        <Badge content={2} color="secondary" variant="outlined" standalone />
+        <Badge content={3} color="accent" variant="outlined" standalone />
+        <Badge content={4} color="success" variant="outlined" standalone />
+        <Badge content={5} color="error" variant="outlined" standalone />
+        <Badge content={6} color="warning" variant="outlined" standalone />
+        <Badge content={7} color="info" variant="outlined" standalone />
+      </div>
+      <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+        <Badge variant="dot" color="primary" standalone />
+        <Badge variant="dot" color="secondary" standalone />
+        <Badge variant="dot" color="accent" standalone />
+        <Badge variant="dot" color="success" standalone />
+        <Badge variant="dot" color="error" standalone />
+        <Badge variant="dot" color="warning" standalone />
+        <Badge variant="dot" color="info" standalone />
+      </div>
     </div>
   ),
 };

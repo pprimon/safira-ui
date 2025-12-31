@@ -1,12 +1,9 @@
 import { createTheme } from "@mui/material/styles";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 import { getAlertThemeOverrides } from "../components/Alert/Alert.theme";
+import { getBadgeThemeOverrides } from "../components/Badge/Badge.theme";
 
 
-/**
- * Tokens de design base do Safira UI
- * Estes valores são usados para construir os temas
- */
 export const designTokens = {
   colors: {
     primary: {
@@ -92,9 +89,11 @@ const getBaseThemeOptions = (mode: "light" | "dark"): ThemeOptions => ({
  */
 const getComponentOverrides = (theme: Theme, mode: "light" | "dark"): ThemeOptions["components"] => {
   const alertOverrides = getAlertThemeOverrides(theme, mode);
+  const badgeOverrides = getBadgeThemeOverrides(theme, mode);
 
   return {
     ...alertOverrides,
+    ...badgeOverrides,
     MuiButton: {
       styleOverrides: {
         root: {

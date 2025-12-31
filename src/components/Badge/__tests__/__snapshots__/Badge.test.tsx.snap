@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Badge Component Snapshots matches snapshot for all colors: badge-accent 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="accent"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-1kgjcet-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all colors: badge-error 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="error"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-gxlgn3-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all colors: badge-info 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="info"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-wg29gv-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all colors: badge-primary 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="primary"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-7rx98c-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all colors: badge-secondary 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="secondary"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-1ihanqt-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all colors: badge-success 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="success"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-kbwc1g-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all colors: badge-warning 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="warning"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-wfsr83-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all sizes: badge-large 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="primary"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-8s8gn0-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all sizes: badge-medium 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="primary"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-7rx98c-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all sizes: badge-small 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="primary"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-11p08oa-MuiBadge-badge"
+  >
+    1
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all variants: badge-dot 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="primary"
+  customvariant="dot"
+>
+  <button>
+    dot
+     button
+  </button>
+  <span
+    class="MuiBadge-badge MuiBadge-dot MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-7yalq2-MuiBadge-badge"
+  />
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all variants: badge-outlined 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="primary"
+  customvariant="outlined"
+>
+  <button>
+    outlined
+     button
+  </button>
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-sinyel-MuiBadge-badge"
+  >
+    5
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for all variants: badge-standard 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="primary"
+  customvariant="standard"
+>
+  <button>
+    standard
+     button
+  </button>
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-e6ebnz-MuiBadge-badge"
+  >
+    5
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for basic badge 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="primary"
+  customvariant="standard"
+>
+  <button>
+    Button
+  </button>
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-e6ebnz-MuiBadge-badge"
+  >
+    5
+  </span>
+</span>
+`;
+
+exports[`Badge Component Snapshots matches snapshot for standalone badge 1`] = `
+<span
+  class="MuiBadge-root css-63ezxx-MuiBadge-root"
+  customcolor="primary"
+  customvariant="standard"
+>
+  <span />
+  <span
+    class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular css-7rx98c-MuiBadge-badge"
+  >
+    New
+  </span>
+</span>
+`;
