@@ -1,0 +1,363 @@
+import { Canvas, Controls, Meta } from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Componente Button
+
+O componente `Button` é utilizado para executar ações e interações no sistema. Oferece múltiplas variantes, tamanhos e estados para diferentes contextos de uso.
+
+## Importação
+
+```typescript
+import { Button } from '@safira-ui/components';
+```
+
+---
+
+## Playground
+
+<Canvas of={ButtonStories.Default} />
+
+## Propriedades
+
+<Controls of={ButtonStories.Default} />
+
+---
+
+## Variantes
+
+O componente `Button` possui cinco variantes visuais para diferentes contextos de uso:
+
+<Canvas of={ButtonStories.AllVariants} />
+
+<table>
+  <thead>
+    <tr>
+      <th>Variante</th>
+      <th>Uso recomendado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>primary</code>
+      </td>
+      <td>Ações principais e CTAs (Call to Action)</td>
+    </tr>
+    <tr>
+      <td>
+        <code>secondary</code>
+      </td>
+      <td>Ações secundárias importantes</td>
+    </tr>
+    <tr>
+      <td>
+        <code>outline</code>
+      </td>
+      <td>Ações alternativas e menos proeminentes</td>
+    </tr>
+    <tr>
+      <td>
+        <code>ghost</code>
+      </td>
+      <td>Ações sutis e links estilizados</td>
+    </tr>
+    <tr>
+      <td>
+        <code>danger</code>
+      </td>
+      <td>Ações destrutivas como exclusão</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="danger">Danger</Button>
+```
+
+---
+
+## Tamanhos
+
+O componente `Button` possui três tamanhos: `small`, `medium` e `large`.
+
+<Canvas of={ButtonStories.Sizes} />
+
+```tsx
+<Button size="small">Small</Button>
+<Button size="medium">Medium</Button>
+<Button size="large">Large</Button>
+```
+
+---
+
+## Com Ícones
+
+Use as propriedades `startIcon` e `endIcon` para adicionar ícones ao botão.
+
+<Canvas of={ButtonStories.WithIcons} />
+
+### Ícone à Esquerda
+
+```tsx
+import { Send } from "@mui/icons-material";
+
+<Button startIcon={<Send />}>Enviar</Button>
+```
+
+### Ícone à Direita
+
+```tsx
+import { ArrowForward } from "@mui/icons-material";
+
+<Button endIcon={<ArrowForward />}>Próximo</Button>
+```
+
+---
+
+## Estado de Carregamento
+
+Use `loading` para indicar que uma ação está em processamento. O botão é automaticamente desabilitado durante o loading.
+
+<Canvas of={ButtonStories.LoadingVariants} />
+
+```tsx
+<Button loading>Processando...</Button>
+
+<Button loading variant="secondary">Salvando...</Button>
+
+<Button loading variant="outline">Carregando...</Button>
+```
+
+---
+
+## Estado Desabilitado
+
+Use `disabled` para desabilitar o botão e impedir interações.
+
+<Canvas of={ButtonStories.DisabledVariants} />
+
+```tsx
+<Button disabled>Desabilitado</Button>
+
+<Button disabled variant="secondary">Indisponível</Button>
+```
+
+---
+
+## Largura Total
+
+Use `fullWidth` para fazer o botão ocupar toda a largura do container.
+
+<Canvas of={ButtonStories.FullWidth} />
+
+```tsx
+<Button fullWidth>Botão Full Width</Button>
+```
+
+---
+
+## Tipos de Botão HTML
+
+O componente suporta os tipos padrão de botão HTML.
+
+```tsx
+<Button type="button">Botão Padrão</Button>
+<Button type="submit">Enviar Formulário</Button>
+<Button type="reset">Limpar Formulário</Button>
+```
+
+---
+
+## Grupo de Botões
+
+Combine diferentes variantes para criar hierarquia visual em grupos de ações.
+
+<Canvas of={ButtonStories.ButtonGroup} />
+
+```tsx
+<div style={{ display: "flex", gap: "8px" }}>
+  <Button variant="outline">Cancelar</Button>
+  <Button variant="primary">Confirmar</Button>
+</div>
+```
+
+---
+
+## Botões de Formulário
+
+Exemplo de uso de botões em contexto de formulário.
+
+<Canvas of={ButtonStories.FormButtons} />
+
+```tsx
+<div style={{ display: "flex", gap: "16px", justifyContent: "flex-end" }}>
+  <Button variant="ghost">Cancelar</Button>
+  <Button variant="outline" type="reset">Limpar</Button>
+  <Button variant="primary" type="submit">Salvar</Button>
+</div>
+```
+
+---
+
+## Barra de Ações
+
+Exemplo de barra de ações com múltiplos botões.
+
+<Canvas of={ButtonStories.ActionBar} />
+
+```tsx
+<div style={{ display: "flex", justifyContent: "space-between" }}>
+  <Button variant="ghost" startIcon={<Settings />}>
+    Configurações
+  </Button>
+  <div style={{ display: "flex", gap: "8px" }}>
+    <Button variant="danger" startIcon={<Delete />}>
+      Excluir
+    </Button>
+    <Button variant="primary" startIcon={<Send />}>
+      Publicar
+    </Button>
+  </div>
+</div>
+```
+
+---
+
+## Exemplo Real - Card de Produto
+
+<Canvas of={ButtonStories.RealWorldExample} />
+
+```tsx
+<div className="product-card">
+  <img src="produto.jpg" alt="Produto" />
+  <h3>Produto Incrível</h3>
+  <p>Descrição do produto</p>
+  <p className="price">R$ 199,90</p>
+  <div className="actions">
+    <Button variant="outline" startIcon={<Favorite />}>
+      Favoritar
+    </Button>
+    <Button variant="primary" startIcon={<ShoppingCart />}>
+      Comprar
+    </Button>
+  </div>
+</div>
+```
+
+---
+
+## Exemplo Real - Formulário de Login
+
+<Canvas of={ButtonStories.LoginForm} />
+
+```tsx
+<form onSubmit={handleSubmit}>
+  <input type="email" placeholder="Email" />
+  <input type="password" placeholder="Senha" />
+  
+  <Button variant="primary" fullWidth type="submit">
+    Entrar
+  </Button>
+  
+  <Button variant="ghost" fullWidth>
+    Esqueci minha senha
+  </Button>
+  
+  <Button variant="outline" fullWidth>
+    Criar Conta
+  </Button>
+</form>
+```
+
+---
+
+## Acessibilidade
+
+O componente `Button` implementa as melhores práticas de acessibilidade:
+
+### Pontos Críticos
+
+<table>
+  <thead>
+    <tr>
+      <th>Atributo</th>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>type</code>
+      </td>
+      <td>
+        Sempre definido explicitamente. Padrão é <code>button</code> para evitar submits acidentais.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>disabled</code>
+      </td>
+      <td>
+        Aplicado corretamente durante loading e quando explicitamente desabilitado.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>focus-visible</code>
+      </td>
+      <td>
+        Outline de foco visível para navegação por teclado com cor de destaque.
+      </td>
+    </tr>
+    <tr>
+      <td>Contraste</td>
+      <td>
+        Todas as variantes mantêm contraste adequado entre texto e fundo.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Navegação por Teclado
+
+- **Tab**: Move o foco para o botão
+- **Enter/Space**: Ativa o botão
+- Botões desabilitados são removidos da ordem de tabulação
+
+### Exemplo com Acessibilidade
+
+```tsx
+<Button
+  variant="primary"
+  onClick={handleSave}
+  aria-label="Salvar alterações do formulário"
+>
+  Salvar
+</Button>
+
+<Button
+  variant="danger"
+  onClick={handleDelete}
+  aria-describedby="delete-warning"
+>
+  Excluir
+</Button>
+<span id="delete-warning" className="sr-only">
+  Esta ação não pode ser desfeita
+</span>
+```
+
+### Boas Práticas
+
+1. **Texto descritivo**: Use textos claros que indiquem a ação do botão.
+2. **Hierarquia visual**: Use `primary` para a ação principal e variantes menores para ações secundárias.
+3. **Feedback de loading**: Sempre mostre loading durante operações assíncronas.
+4. **Confirmação de ações destrutivas**: Para ações `danger`, considere adicionar confirmação.
+5. **Ícones com significado**: Use ícones que reforcem o significado da ação.
+

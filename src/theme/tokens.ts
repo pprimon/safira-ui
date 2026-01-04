@@ -1,12 +1,21 @@
 export const colors = {
   white: '#FFFFFF',
   black: '#000000',
+  overlay: {
+    light: 'rgba(255, 255, 255, 0.1)',
+    dark: 'rgba(0, 0, 0, 0.1)',
+  },
   
   primary: {
     main: '#9472C8',
     light: '#B899D4',
     dark: '#572F93',
     contrastText: '#FFFFFF',
+    alpha: {
+      hover: 'rgba(148, 114, 200, 0.12)',
+      active: 'rgba(148, 114, 200, 0.2)',
+      shadow: 'rgba(148, 114, 200, 0.25)',
+    },
   },
   secondary: {
     main: '#572F93',
@@ -77,6 +86,9 @@ export const colors = {
     filled: {
       background: '#D32F2F',
       border: '#EF5350',
+    },
+    alpha: {
+      shadow: 'rgba(244, 67, 54, 0.25)',
     },
   },
   warning: {

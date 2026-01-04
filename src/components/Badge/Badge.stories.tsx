@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "./Badge";
-import { Button } from "../Button";
+import { Button } from "../Button/Button";
 import { IconButton, Avatar } from "@mui/material";
 import {
   Notifications,

@@ -1,0 +1,200 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Button Component Snapshots matches snapshot for all sizes: button-large 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-1qglinu-MuiButtonBase-root-MuiButton-root"
+  customsize="large"
+  customvariant="primary"
+  tabindex="0"
+  type="button"
+>
+  large
+   Button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for all sizes: button-medium 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-59uyod-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="primary"
+  tabindex="0"
+  type="button"
+>
+  medium
+   Button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for all sizes: button-small 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-7jwuvk-MuiButtonBase-root-MuiButton-root"
+  customsize="small"
+  customvariant="primary"
+  tabindex="0"
+  type="button"
+>
+  small
+   Button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for all variants: button-danger 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-1wlb3p6-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="danger"
+  tabindex="0"
+  type="button"
+>
+  danger
+   Button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for all variants: button-ghost 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-zftqmi-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="ghost"
+  tabindex="0"
+  type="button"
+>
+  ghost
+   Button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for all variants: button-outline 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-nz5och-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="outline"
+  tabindex="0"
+  type="button"
+>
+  outline
+   Button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for all variants: button-primary 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-59uyod-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="primary"
+  tabindex="0"
+  type="button"
+>
+  primary
+   Button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for all variants: button-secondary 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-113q1kt-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="secondary"
+  tabindex="0"
+  type="button"
+>
+  secondary
+   Button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for basic button 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-59uyod-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="primary"
+  tabindex="0"
+  type="button"
+>
+  Basic button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for disabled state 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-59uyod-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="primary"
+  disabled=""
+  tabindex="-1"
+  type="button"
+>
+  Disabled
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for fullWidth 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-flhknk-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="primary"
+  tabindex="0"
+  type="button"
+>
+  Full Width Button
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot for loading state 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-59uyod-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="primary"
+  disabled=""
+  tabindex="-1"
+  type="button"
+>
+  <span
+    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8lcrkz-MuiCircularProgress-root"
+    role="progressbar"
+    style="width: 20px; height: 20px;"
+  >
+    <svg
+      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+      viewBox="22 22 44 44"
+    >
+      <circle
+        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+        cx="44"
+        cy="44"
+        fill="none"
+        r="20.2"
+        stroke-width="3.6"
+      />
+    </svg>
+  </span>
+  Loading
+</button>
+`;
+
+exports[`Button Component Snapshots matches snapshot with icons 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-59uyod-MuiButtonBase-root-MuiButton-root"
+  customsize="medium"
+  customvariant="primary"
+  tabindex="0"
+  type="button"
+>
+  <span
+    class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1v1j2p3-MuiButton-startIcon"
+  >
+    <span>
+      →
+    </span>
+  </span>
+  With Icons
+  <span
+    class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-1wyk03i-MuiButton-endIcon"
+  >
+    <span>
+      →
+    </span>
+  </span>
+</button>
+`;
