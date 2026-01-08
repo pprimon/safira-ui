@@ -5,7 +5,7 @@ export { Select } from './Select';
 export { Modal } from './Modal';
 export { Tooltip } from './Tooltip';
 export { Alert } from './Alert/Alert';
-export { Card } from './Card';
+export { Card } from './Card/Card';
 export { Badge } from './Badge/Badge';
 
 // Tipos
@@ -16,5 +16,5 @@ export type { SelectProps, SelectOption } from './Select';
 export type { ModalProps } from './Modal';
 export type { TooltipProps } from './Tooltip';
 export type { AlertProps } from './Alert/Alert';
-export type { CardProps } from './Card';
+export type { CardProps } from './Card/Card';
 export type { BadgeProps } from './Badge/Badge';

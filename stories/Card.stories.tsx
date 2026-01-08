@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 // Mock function for actions
 const fn = () => () => {};
-import { Card } from "../src/components/Card";
+import { Card } from "../src/components/Card/Card";
 import { Button } from "../src/components/Button/Button";
 import { Avatar, IconButton } from "@mui/material";
 import { MoreVert, Favorite, Share, Settings } from "@mui/icons-material";
@@ -81,7 +81,7 @@ export const SimpleCard: Story = {
     showActions: false,
     children: (
       <div>
-        <h3 style={{ margin: "0 0 16px 0", color: "#3F3E33" }}>Card Simples</h3>
+        <h3 style={{ margin: "0 0 16px 0" }}>Card Simples</h3>
         <p>Um card básico sem header ou ações, apenas com conteúdo.</p>
       </div>
     ),
@@ -281,7 +281,7 @@ export const NoHeaderNoActions: Story = {
     children: (
       <div style={{ textAlign: "center", padding: "24px" }}>
         <h2 style={{ margin: "0 0 16px 0", color: "#572F93" }}>🎉</h2>
-        <h3 style={{ margin: "0 0 8px 0", color: "#3F3E33" }}>Parabéns!</h3>
+        <h3 style={{ margin: "0 0 8px 0" }}>Parabéns!</h3>
         <p style={{ margin: 0, color: "#60586B" }}>
           Você completou todas as tarefas.
         </p>

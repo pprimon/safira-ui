@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Card Component Snapshots matches snapshot for all variants: card-elevated 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-zw8iop-MuiPaper-root-MuiCard-root"
+  data-clickable="false"
+  data-variant="elevated"
+  style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+>
+  <div
+    class="MuiCardHeader-root css-e2j694-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-content css-1jkp9bu-MuiCardHeader-content"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title css-ar80sj-MuiTypography-root"
+      >
+        elevated Card
+      </span>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root css-17zsar3-MuiCardContent-root"
+  >
+    <div>
+      elevated
+       card content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card Component Snapshots matches snapshot for all variants: card-filled 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-zw8iop-MuiPaper-root-MuiCard-root"
+  data-clickable="false"
+  data-variant="filled"
+  style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+>
+  <div
+    class="MuiCardHeader-root css-e2j694-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-content css-1jkp9bu-MuiCardHeader-content"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title css-ar80sj-MuiTypography-root"
+      >
+        filled Card
+      </span>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root css-17zsar3-MuiCardContent-root"
+  >
+    <div>
+      filled
+       card content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card Component Snapshots matches snapshot for all variants: card-outlined 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-zw8iop-MuiPaper-root-MuiCard-root"
+  data-clickable="false"
+  data-variant="outlined"
+  style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+>
+  <div
+    class="MuiCardHeader-root css-e2j694-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-content css-1jkp9bu-MuiCardHeader-content"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title css-ar80sj-MuiTypography-root"
+      >
+        outlined Card
+      </span>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root css-17zsar3-MuiCardContent-root"
+  >
+    <div>
+      outlined
+       card content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card Component Snapshots matches snapshot for basic card 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-zw8iop-MuiPaper-root-MuiCard-root"
+  data-clickable="false"
+  data-variant="elevated"
+  style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+>
+  <div
+    class="MuiCardContent-root css-17zsar3-MuiCardContent-root"
+  >
+    <div>
+      Basic card content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card Component Snapshots matches snapshot for complete card 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root card-clickable css-zw8iop-MuiPaper-root-MuiCard-root"
+  data-clickable="true"
+  data-variant="elevated"
+  role="button"
+  style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+  tabindex="0"
+>
+  <div
+    class="MuiCardHeader-root css-e2j694-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-avatar css-6argyz-MuiCardHeader-avatar"
+    >
+      <div>
+        A
+      </div>
+    </div>
+    <div
+      class="MuiCardHeader-content css-1jkp9bu-MuiCardHeader-content"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-body2 MuiCardHeader-title css-1ptcyee-MuiTypography-root"
+      >
+        Complete Card
+      </span>
+      <span
+        class="MuiTypography-root MuiTypography-body2 MuiCardHeader-subheader css-1s41fib-MuiTypography-root"
+      >
+        Full featured
+      </span>
+    </div>
+    <div
+      class="MuiCardHeader-action css-1xlsymy-MuiCardHeader-action"
+    >
+      <button>
+        Menu
+      </button>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root css-17zsar3-MuiCardContent-root"
+  >
+    <div>
+      Complete card content
+    </div>
+  </div>
+  <div
+    class="MuiCardActions-root MuiCardActions-spacing css-17rurla-MuiCardActions-root"
+  >
+    <button>
+      Action
+    </button>
+  </div>
+</div>
+`;

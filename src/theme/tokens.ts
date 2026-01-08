@@ -15,6 +15,8 @@ export const colors = {
       hover: 'rgba(148, 114, 200, 0.12)',
       active: 'rgba(148, 114, 200, 0.2)',
       shadow: 'rgba(148, 114, 200, 0.25)',
+      light: 'rgba(184, 153, 212, 0.25)',
+      lightDark: 'rgba(148, 114, 200, 0.15)',
     },
   },
   secondary: {

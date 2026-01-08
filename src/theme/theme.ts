@@ -3,6 +3,7 @@ import type { Theme, ThemeOptions } from "@mui/material/styles";
 import { getAlertThemeOverrides } from "../components/Alert/Alert.theme";
 import { getBadgeThemeOverrides } from "../components/Badge/Badge.theme";
 import { getButtonThemeOverrides } from "../components/Button/Button.theme";
+import { getCardThemeOverrides } from "../components/Card/Card.theme";
 
 
 export const designTokens = {
@@ -85,27 +86,13 @@ const getComponentOverrides = (theme: Theme, mode: "light" | "dark"): ThemeOptio
   const alertOverrides = getAlertThemeOverrides(theme, mode);
   const badgeOverrides = getBadgeThemeOverrides(theme, mode);
   const buttonOverrides = getButtonThemeOverrides(theme, mode);
+  const cardOverrides = getCardThemeOverrides(theme, mode);
 
   return {
     ...alertOverrides,
     ...badgeOverrides,
     ...buttonOverrides,
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          borderRadius: designTokens.shape.borderRadiusXl,
-          boxShadow: theme.shadows[2],
-          "&:hover": {
-            boxShadow: theme.shadows[4],
-            transform: "translateY(-2px)",
-          },
-          transition: theme.transitions.create(
-            ["box-shadow", "transform"],
-            { duration: theme.transitions.duration.shorter }
-          ),
-        },
-      },
-    },
+    ...cardOverrides,
     MuiPaper: {
       styleOverrides: {
         root: {
