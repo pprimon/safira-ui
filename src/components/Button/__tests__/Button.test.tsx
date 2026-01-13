@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
@@ -115,6 +114,12 @@ describe("Button Component", () => {
       renderWithTheme(<Button fullWidth>Full Width</Button>);
       const button = screen.getByRole("button");
       expect(button).toBeInTheDocument();
+    });
+
+    it("has aria-busy when loading", () => {
+      renderWithTheme(<Button loading>Loading</Button>);
+      const button = screen.getByRole("button");
+      expect(button).toHaveAttribute("aria-busy", "true");
     });
   });
 
@@ -278,6 +283,22 @@ describe("Button Component", () => {
       );
       const button = screen.getByRole("button");
       expect(button).toHaveAttribute("aria-describedby", "description");
+    });
+
+    it("has aria-disabled when disabled", () => {
+      renderWithTheme(<Button disabled>Disabled</Button>);
+      const button = screen.getByRole("button");
+      expect(button).toHaveAttribute("aria-disabled", "true");
+    });
+
+    it("announces loading state to screen readers", () => {
+      renderWithTheme(<Button loading>Loading</Button>);
+      expect(screen.getByRole("status")).toBeInTheDocument();
+    });
+
+    it("supports custom loading text for i18n", () => {
+      renderWithTheme(<Button loading loadingText="Please wait...">Loading</Button>);
+      expect(screen.getByText("Please wait...")).toBeInTheDocument();
     });
   });
 

@@ -5,72 +5,59 @@ import { getBadgeThemeOverrides } from "../components/Badge/Badge.theme";
 import { getButtonThemeOverrides } from "../components/Button/Button.theme";
 import { getCardThemeOverrides } from "../components/Card/Card.theme";
 import { getInputThemeOverrides } from "../components/Input/Input.theme";
-
+import { colors, borderRadius, typography } from "./tokens";
 
 export const designTokens = {
-  colors: {
-    primary: {
-      main: "#9472C8",
-      light: "#B899D4",
-      dark: "#572F93",
-      contrastText: "#FFFFFF",
-    },
-    secondary: {
-      main: "#572F93",
-      light: "#7A5BAD",
-      dark: "#3F2066",
-      contrastText: "#EBE54B",
-    },
-    accent: {
-      main: "#EBE54B",
-      light: "#F0EB70",
-      dark: "#D4CE3A",
-      contrastText: "#3F3E33",
-    },
-    success: {
-      main: "#4CAF50",
-      light: "#81C784",
-      dark: "#1B5E20", // Verde mais escuro para melhor contraste (7:1 com #E8F5E9)
-      contrastText: "#FFFFFF",
-    },
-    error: {
-      main: "#F44336",
-      light: "#E57373",
-      dark: "#B71C1C", // Vermelho mais escuro para melhor contraste (7:1 com #FFEBEE)
-      contrastText: "#FFFFFF",
-    },
-    warning: {
-      main: "#FF9800",
-      light: "#FFB74D",
-      dark: "#BF360C", // Deep Orange 900 para melhor contraste (7:1 com #FFF3E0)
-      contrastText: "#000000",
-    },
-    info: {
-      main: "#2196F3",
-      light: "#64B5F6",
-      dark: "#0D47A1", // Azul mais escuro para melhor contraste (7:1 com #E3F2FD)
-      contrastText: "#FFFFFF",
-    },
-  },
+  colors,
   shape: {
-    borderRadius: 8,
-    borderRadiusLg: 12,
-    borderRadiusXl: 16,
+    borderRadius: borderRadius.md,
+    borderRadiusLg: borderRadius.lg,
+    borderRadiusXl: borderRadius.xl,
   },
   typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: typography.fontFamily.primary,
   },
-};
+} as const;
 
 const getBaseThemeOptions = (mode: "light" | "dark"): ThemeOptions => ({
   palette: {
     mode,
-    primary: designTokens.colors.primary,
-    secondary: designTokens.colors.secondary,
-    success: designTokens.colors.success,
-    error: designTokens.colors.error,
-    warning: designTokens.colors.warning,
-    info: designTokens.colors.info,
+    primary: {
+      main: colors.primary.main,
+      light: colors.primary.light,
+      dark: colors.primary.dark,
+      contrastText: colors.primary.contrastText,
+    },
+    secondary: {
+      main: colors.secondary.main,
+      light: colors.secondary.light,
+      dark: colors.secondary.dark,
+      contrastText: colors.secondary.contrastText,
+    },
+    success: {
+      main: colors.success.main,
+      light: colors.success.light,
+      dark: colors.success.dark,
+      contrastText: colors.success.contrastText,
+    },
+    error: {
+      main: colors.error.main,
+      light: colors.error.light,
+      dark: colors.error.dark,
+      contrastText: colors.error.contrastText,
+    },
+    warning: {
+      main: colors.warning.main,
+      light: colors.warning.light,
+      dark: colors.warning.dark,
+      contrastText: colors.warning.contrastText,
+    },
+    info: {
+      main: colors.info.main,
+      light: colors.info.light,
+      dark: colors.info.dark,
+      contrastText: colors.info.contrastText,
+    },
   },
   typography: {
     fontFamily: designTokens.typography.fontFamily,
@@ -81,9 +68,30 @@ const getBaseThemeOptions = (mode: "light" | "dark"): ThemeOptions => ({
   shape: {
     borderRadius: designTokens.shape.borderRadius,
   },
+  transitions: {
+    create: (props, options) => {
+      const defaultOptions = {
+        duration: 250,
+        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+        delay: 0,
+        ...options,
+      };
+
+      const properties = Array.isArray(props) ? props : [props];
+      const transitions = properties.map(
+        (prop) =>
+          `${prop} ${defaultOptions.duration}ms ${defaultOptions.easing} ${defaultOptions.delay}ms`
+      );
+
+      return transitions.join(", ");
+    },
+  },
 });
 
-const getComponentOverrides = (theme: Theme, mode: "light" | "dark"): ThemeOptions["components"] => {
+const getComponentOverrides = (
+  theme: Theme,
+  mode: "light" | "dark"
+): ThemeOptions["components"] => {
   const alertOverrides = getAlertThemeOverrides(theme, mode);
   const badgeOverrides = getBadgeThemeOverrides(theme, mode);
   const buttonOverrides = getButtonThemeOverrides(theme, mode);
@@ -96,6 +104,17 @@ const getComponentOverrides = (theme: Theme, mode: "light" | "dark"): ThemeOptio
     ...buttonOverrides,
     ...cardOverrides,
     ...inputOverrides,
+    MuiCssBaseline: {
+      styleOverrides: {
+        "@media (prefers-reduced-motion: reduce)": {
+          "*": {
+            animationDuration: "0.01ms !important",
+            animationIterationCount: "1 !important",
+            transitionDuration: "0.01ms !important",
+          },
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {
@@ -111,14 +130,15 @@ const getComponentOverrides = (theme: Theme, mode: "light" | "dark"): ThemeOptio
         },
       },
     },
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: false,
+      },
+    },
   };
 };
 
-/**
- * Cria um tema Safira UI completo
- */
 const createSafiraTheme = (mode: "light" | "dark"): Theme => {
-  // Primeiro, cria o tema base
   const baseTheme = createTheme({
     ...getBaseThemeOptions(mode),
     palette: {
@@ -129,31 +149,28 @@ const createSafiraTheme = (mode: "light" | "dark"): Theme => {
           : { default: "#1A1A2E", paper: "#252538" },
       text:
         mode === "light"
-          ? { primary: "#3F3E33", secondary: "#60586B", disabled: "#9E9E9E" }
-          : { primary: "#FFFFFF", secondary: "#B0B0B0", disabled: "#666666" },
+          ? {
+              primary: colors.text.primary,
+              secondary: colors.text.secondary,
+              disabled: colors.text.disabled,
+            }
+          : {
+              primary: "#FFFFFF",
+              secondary: "#B0B0B0",
+              disabled: "#666666",
+            },
     },
   });
 
-  // Depois, aplica as customizações de componentes que precisam do tema
   return createTheme(baseTheme, {
     components: getComponentOverrides(baseTheme, mode),
   });
 };
 
-/**
- * Tema claro do Safira UI
- */
 export const lightTheme: Theme = createSafiraTheme("light");
 
-/**
- * Tema escuro do Safira UI
- */
 export const darkTheme: Theme = createSafiraTheme("dark");
 
-/**
- * Função para criar um tema customizado baseado no Safira UI
- * Permite sobrescrever cores e configurações
- */
 export const createCustomTheme = (
   mode: "light" | "dark",
   customOptions?: Partial<ThemeOptions>

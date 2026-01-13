@@ -1,4 +1,4 @@
-import React from "react";
+import { useId, cloneElement, isValidElement } from "react";
 import { Tooltip as MuiTooltip, Zoom } from "@mui/material";
 import type { TooltipProps as MuiTooltipProps } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -25,6 +25,7 @@ export interface TooltipProps
   followCursor?: boolean;
   maxWidth?: number;
   open?: boolean;
+  describeChild?: boolean;
 }
 
 export const Tooltip: React.FC<TooltipProps> = ({
@@ -37,11 +38,13 @@ export const Tooltip: React.FC<TooltipProps> = ({
   followCursor = false,
   maxWidth = 300,
   open,
+  describeChild = true,
   className,
   "data-testid": dataTestId,
   ...rest
 }) => {
   const theme = useTheme();
+  const tooltipId = useId();
 
   const getVariantStyles = () => {
     const variants = {
@@ -90,19 +93,41 @@ export const Tooltip: React.FC<TooltipProps> = ({
     return placements[pos];
   };
 
+  const childWithAria = isValidElement(children)
+    ? cloneElement(children, {
+        "aria-describedby": open !== false ? tooltipId : undefined,
+      } as React.HTMLAttributes<HTMLElement>)
+    : children;
+
   return (
     <MuiTooltip
+      id={tooltipId}
       title={title}
       placement={getMuiPlacement(placement)}
       enterDelay={enterDelay}
       leaveDelay={leaveDelay}
       followCursor={followCursor}
       open={open}
+      describeChild={describeChild}
       TransitionComponent={Zoom}
-      TransitionProps={{ timeout: theme.transitions.duration.shorter }}
+      TransitionProps={{
+        timeout: theme.transitions.duration.shorter,
+        style: {
+          transitionDuration: "0ms",
+        },
+      }}
       className={className}
       data-testid={dataTestId}
-      componentsProps={{
+      slotProps={{
+        popper: {
+          sx: {
+            "@media (prefers-reduced-motion: reduce)": {
+              "& .MuiTooltip-tooltip": {
+                transition: "none !important",
+              },
+            },
+          },
+        },
         tooltip: {
           sx: {
             ...getVariantStyles(),
@@ -123,7 +148,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       arrow
       {...rest}
     >
-      {children}
+      {childWithAria}
     </MuiTooltip>
   );
 };

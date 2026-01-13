@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ThemeProvider } from "@mui/material/styles";
@@ -45,6 +44,15 @@ describe("Modal Component", () => {
         </Modal>
       );
       expect(screen.getByText("Test Title")).toBeInTheDocument();
+    });
+
+    it("renders title as h2 heading", () => {
+      renderWithTheme(
+        <Modal {...defaultProps} title="Test Title">
+          <p>Modal content</p>
+        </Modal>
+      );
+      expect(screen.getByRole("heading", { level: 2, name: "Test Title" })).toBeInTheDocument();
     });
 
     it("renders close button by default", () => {
@@ -150,7 +158,7 @@ describe("Modal Component", () => {
       const backdrop = document.querySelector(".MuiBackdrop-root");
       if (backdrop) {
         fireEvent.click(backdrop);
-      expect(handleClose).not.toHaveBeenCalled();
+        expect(handleClose).not.toHaveBeenCalled();
       }
     });
   });
@@ -163,7 +171,7 @@ describe("Modal Component", () => {
         </Modal>
       );
       expect(screen.getByText("XS modal")).toBeInTheDocument();
-  });
+    });
 
     it("renders with md maxWidth", () => {
       renderWithTheme(
@@ -202,6 +210,36 @@ describe("Modal Component", () => {
       );
       const closeButton = screen.getByTestId("modal-close-button");
       expect(closeButton).toHaveAttribute("aria-label", "Fechar modal");
+    });
+
+    it("supports custom close button aria-label for i18n", () => {
+      renderWithTheme(
+        <Modal {...defaultProps} title="Test" closeButtonAriaLabel="Close dialog">
+          <p>Modal content</p>
+        </Modal>
+      );
+      const closeButton = screen.getByTestId("modal-close-button");
+      expect(closeButton).toHaveAttribute("aria-label", "Close dialog");
+    });
+
+    it("has aria-labelledby when title is provided", () => {
+      renderWithTheme(
+        <Modal {...defaultProps} title="Test Title">
+          <p>Modal content</p>
+        </Modal>
+      );
+      const dialog = screen.getByRole("dialog");
+      expect(dialog).toHaveAttribute("aria-labelledby");
+    });
+
+    it("has aria-describedby when ariaDescription is provided", () => {
+      renderWithTheme(
+        <Modal {...defaultProps} title="Test" ariaDescription="This is a test modal">
+          <p>Modal content</p>
+        </Modal>
+      );
+      const dialog = screen.getByRole("dialog");
+      expect(dialog).toHaveAttribute("aria-describedby");
     });
   });
 
@@ -254,3 +292,4 @@ describe("Modal Component", () => {
     });
   });
 });
+

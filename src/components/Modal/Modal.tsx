@@ -1,4 +1,4 @@
-import React from "react";
+import { useId } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -6,6 +6,7 @@ import {
   DialogActions,
   IconButton,
   Fade,
+  Typography,
 } from "@mui/material";
 import type { DialogProps } from "@mui/material";
 import { Close } from "@mui/icons-material";
@@ -27,6 +28,8 @@ export interface ModalProps
   closeOnBackdropClick?: boolean;
   closeOnEscape?: boolean;
   fullHeight?: boolean;
+  ariaDescription?: string;
+  closeButtonAriaLabel?: string;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -43,10 +46,15 @@ export const Modal: React.FC<ModalProps> = ({
   fullHeight = false,
   size = "medium",
   className,
+  ariaDescription,
+  closeButtonAriaLabel = "Fechar modal",
   "data-testid": dataTestId,
   ...rest
 }) => {
   const theme = useTheme();
+  const uniqueId = useId();
+  const titleId = `modal-title-${uniqueId}`;
+  const descriptionId = `modal-description-${uniqueId}`;
 
   const handleBackdropClick = () => {
     if (closeOnBackdropClick) {
@@ -89,10 +97,15 @@ export const Modal: React.FC<ModalProps> = ({
       TransitionComponent={Fade}
       TransitionProps={{ timeout: theme.transitions.duration.standard }}
       disableEscapeKeyDown={!closeOnEscape}
+      aria-labelledby={title ? titleId : undefined}
+      aria-describedby={ariaDescription ? descriptionId : undefined}
       sx={{
         "& .MuiBackdrop-root": {
           backgroundColor: alpha(theme.palette.common.black, 0.6),
           backdropFilter: "blur(4px)",
+          "@media (prefers-reduced-motion: reduce)": {
+            backdropFilter: "none",
+          },
         },
         "& .MuiDialog-paper": {
           borderRadius: 3,
@@ -104,6 +117,8 @@ export const Modal: React.FC<ModalProps> = ({
     >
       {(title || showCloseButton) && (
         <DialogTitle
+          id={titleId}
+          component="div"
           sx={{
             display: "flex",
             alignItems: "center",
@@ -113,20 +128,21 @@ export const Modal: React.FC<ModalProps> = ({
           }}
         >
           {title && (
-            <span
-              style={{
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
                 fontWeight: theme.typography.fontWeightBold,
-                fontSize: theme.typography.h6.fontSize,
                 color: theme.palette.text.primary,
               }}
             >
               {title}
-            </span>
+            </Typography>
           )}
           {showCloseButton && (
             <IconButton
               onClick={onClose}
-              aria-label="Fechar modal"
+              aria-label={closeButtonAriaLabel}
               data-testid="modal-close-button"
               size="small"
               sx={{
@@ -138,10 +154,16 @@ export const Modal: React.FC<ModalProps> = ({
                     duration: theme.transitions.duration.shorter,
                   }
                 ),
+                "@media (prefers-reduced-motion: reduce)": {
+                  transition: "none",
+                },
                 "&:hover": {
                   backgroundColor: alpha(theme.palette.error.light, 0.12),
                   color: "error.main",
                   transform: "scale(1.1) rotate(90deg)",
+                  "@media (prefers-reduced-motion: reduce)": {
+                    transform: "none",
+                  },
                 },
               }}
             >
@@ -157,6 +179,11 @@ export const Modal: React.FC<ModalProps> = ({
           color: theme.palette.text.primary,
         }}
       >
+        {ariaDescription && (
+          <span id={descriptionId} className="sr-only">
+            {ariaDescription}
+          </span>
+        )}
         {children}
       </DialogContent>
 

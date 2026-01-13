@@ -1,15 +1,5 @@
-/**
- * Safira UI - Mini Design System
- * 
- * Sistema de design moderno baseado em React + TypeScript + Material UI
- * com identidade visual própria e componentes acessíveis.
- */
+export * from "./components";
+export * from "./theme";
+export * from "./types";
 
-// Componentes
-export * from './components';
-
-// Sistema de Temas
-export * from './theme';
-
-// Tipos
-export * from './types';
+import "./index.css";

@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ThemeProvider } from "@mui/material/styles";
@@ -95,7 +94,6 @@ describe("Alert Component", () => {
   describe("Icons", () => {
     it("shows icon by default", () => {
       renderWithTheme(<Alert severity="success">Alert with icon</Alert>);
-      // Verifica se existe um elemento com classe de ícone do MUI
       expect(document.querySelector(".MuiAlert-icon")).toBeInTheDocument();
     });
 
@@ -191,6 +189,40 @@ describe("Alert Component", () => {
       const closeButton = screen.getByTestId("alert-close-button");
       expect(closeButton).toHaveAttribute("aria-label", "Fechar alerta");
     });
+
+    it("supports custom close button aria-label for i18n", () => {
+      renderWithTheme(
+        <Alert severity="warning" closable closeButtonAriaLabel="Dismiss alert">
+          Alert with close button
+        </Alert>
+      );
+      const closeButton = screen.getByTestId("alert-close-button");
+      expect(closeButton).toHaveAttribute("aria-label", "Dismiss alert");
+    });
+
+    it("has aria-live polite by default", () => {
+      renderWithTheme(<Alert severity="info">Info message</Alert>);
+      const alert = screen.getByRole("alert");
+      expect(alert).toHaveAttribute("aria-live", "polite");
+    });
+
+    it("has aria-live assertive for errors", () => {
+      renderWithTheme(<Alert severity="error">Error message</Alert>);
+      const alert = screen.getByRole("alert");
+      expect(alert).toHaveAttribute("aria-live", "assertive");
+    });
+
+    it("supports custom aria-live", () => {
+      renderWithTheme(<Alert severity="info" ariaLive="off">Silent alert</Alert>);
+      const alert = screen.getByRole("alert");
+      expect(alert).toHaveAttribute("aria-live", "off");
+    });
+
+    it("has aria-atomic true", () => {
+      renderWithTheme(<Alert severity="info">Atomic alert</Alert>);
+      const alert = screen.getByRole("alert");
+      expect(alert).toHaveAttribute("aria-atomic", "true");
+    });
   });
 
   describe("Custom Props", () => {
@@ -257,3 +289,6 @@ describe("Alert Component", () => {
     });
   });
 });
+
+// Import React for controlled component test
+import React from "react";

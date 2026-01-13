@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Alert as MuiAlert,
   AlertTitle,
@@ -30,6 +29,8 @@ export interface AlertProps extends Omit<MuiAlertProps, "title"> {
   icon?: React.ReactNode;
   showIcon?: boolean;
   "data-testid"?: string;
+  closeButtonAriaLabel?: string;
+  ariaLive?: "polite" | "assertive" | "off";
 }
 
 export const Alert: React.FC<AlertProps> = ({
@@ -43,6 +44,8 @@ export const Alert: React.FC<AlertProps> = ({
   severity = "info",
   variant = "standard",
   sx,
+  closeButtonAriaLabel = "Fechar alerta",
+  ariaLive,
   "data-testid": dataTestId,
   ...rest
 }) => {
@@ -55,22 +58,36 @@ export const Alert: React.FC<AlertProps> = ({
     return <DefaultIcon />;
   };
 
+  const getAriaLive = (): "polite" | "assertive" | "off" => {
+    if (ariaLive) return ariaLive;
+    if (severity === "error") return "assertive";
+    return "polite";
+  };
+
   return (
     <Collapse
       in={visible}
       timeout={theme.transitions.duration.standard}
       unmountOnExit
+      sx={{
+        "@media (prefers-reduced-motion: reduce)": {
+          transition: "none",
+        },
+      }}
     >
       <MuiAlert
         severity={severity}
         variant={variant}
         icon={getIcon()}
         onClose={closable ? onClose : undefined}
+        role="alert"
+        aria-live={getAriaLive()}
+        aria-atomic="true"
         action={
           closable ? (
             <IconButton
               onClick={onClose}
-              aria-label="Fechar alerta"
+              aria-label={closeButtonAriaLabel}
               size="small"
               data-testid="alert-close-button"
               sx={{
@@ -83,10 +100,16 @@ export const Alert: React.FC<AlertProps> = ({
                     duration: theme.transitions.duration.shorter,
                   }
                 ),
+                "@media (prefers-reduced-motion: reduce)": {
+                  transition: "none",
+                },
                 "&:hover": {
                   backgroundColor: alpha(theme.palette.error.light, 0.12),
                   color: "error.main",
                   transform: "scale(1.1) rotate(90deg)",
+                  "@media (prefers-reduced-motion: reduce)": {
+                    transform: "none",
+                  },
                 },
               }}
             >

@@ -1,9 +1,9 @@
-import React from "react";
 import { Button as MuiButton, CircularProgress } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import "./Button.theme";
 import type { ButtonVariant, ButtonSize } from "./Button.theme";
 import { colors, spacing } from "../../theme/tokens";
+import { VisuallyHidden } from "../VisuallyHidden/VisuallyHidden";
 
 export interface ButtonProps extends Omit<MuiButtonProps, "variant" | "size"> {
   children: React.ReactNode;
@@ -17,6 +17,7 @@ export interface ButtonProps extends Omit<MuiButtonProps, "variant" | "size"> {
   endIcon?: React.ReactNode;
   className?: string;
   "data-testid"?: string;
+  loadingText?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -31,6 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
   type = "button",
   onClick,
   className,
+  loadingText = "Carregando",
   "data-testid": dataTestId,
   ...rest
 }) => {
@@ -78,6 +80,8 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={handleClick}
       className={className}
       data-testid={dataTestId}
+      aria-busy={loading}
+      aria-disabled={isDisabled}
       startIcon={loading ? undefined : startIcon}
       endIcon={loading ? undefined : endIcon}
       customSize={size}
@@ -85,13 +89,19 @@ export const Button: React.FC<ButtonProps> = ({
       {...rest}
     >
       {loading && (
-        <CircularProgress
-          size={size === "small" ? 16 : size === "large" ? 24 : 20}
-          sx={{
-            color: getLoaderColor(),
-            marginRight: children ? spacing.xs : 0,
-          }}
-        />
+        <>
+          <CircularProgress
+            size={size === "small" ? 16 : size === "large" ? 24 : 20}
+            aria-hidden="true"
+            sx={{
+              color: getLoaderColor(),
+              marginRight: children ? spacing.xs : 0,
+            }}
+          />
+          <VisuallyHidden aria-live="polite" role="status">
+            {loadingText}
+          </VisuallyHidden>
+        </>
       )}
       {children}
     </MuiButton>

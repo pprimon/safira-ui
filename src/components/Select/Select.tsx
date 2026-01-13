@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef, useId } from "react";
 import {
   FormControl,
   InputLabel,
@@ -7,6 +7,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 import type { SelectProps as MuiSelectProps, SelectChangeEvent } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import type { BaseComponentProps, SizeProps, DisabledProps } from "../../types";
 
 export interface SelectOption {
@@ -30,6 +31,7 @@ export interface SelectProps
   helperText?: string;
   fullWidth?: boolean;
   multiple?: boolean;
+  ariaDescribedBy?: string;
 }
 
 export const Select = forwardRef<HTMLDivElement, SelectProps>(
@@ -48,14 +50,22 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
       size = "medium",
       disabled = false,
       className,
+      ariaDescribedBy,
       "data-testid": dataTestId,
       ...rest
     },
     ref
   ) => {
-    const labelId = label ? `${label.toLowerCase().replace(/\s+/g, "-")}-label` : undefined;
+    const theme = useTheme();
+    const uniqueId = useId();
+    const labelId = label ? `select-label-${uniqueId}` : undefined;
+    const helperTextId = helperText ? `select-helper-${uniqueId}` : undefined;
     const hasValue = value !== undefined && value !== "" && (!Array.isArray(value) || value.length > 0);
     const shouldShrink = hasValue || !!placeholder;
+    
+    const describedBy = [ariaDescribedBy, helperTextId]
+      .filter(Boolean)
+      .join(" ") || undefined;
 
     return (
       <FormControl
@@ -81,10 +91,14 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           displayEmpty={!!placeholder}
           notched={shouldShrink}
           data-testid={dataTestId}
+          aria-describedby={describedBy}
+          aria-invalid={error}
           renderValue={(selected) => {
             if (!selected || (Array.isArray(selected) && selected.length === 0)) {
               return placeholder ? (
-                <span style={{ color: "#9e9e9e" }}>{placeholder}</span>
+                <span style={{ color: theme.palette.text.disabled }}>
+                  {placeholder}
+                </span>
               ) : null;
             }
 
@@ -108,7 +122,9 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
             </MenuItem>
           ))}
         </MuiSelect>
-        {helperText && <FormHelperText>{helperText}</FormHelperText>}
+        {helperText && (
+          <FormHelperText id={helperTextId}>{helperText}</FormHelperText>
+        )}
       </FormControl>
     );
   }

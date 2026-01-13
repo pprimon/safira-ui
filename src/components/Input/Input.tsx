@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef, useId } from "react";
 import { TextField, InputAdornment } from "@mui/material";
 import type { TextFieldProps } from "@mui/material";
 import type { BaseComponentProps, SizeProps, DisabledProps } from "../../types";
@@ -22,6 +22,7 @@ export interface InputProps
   endIcon?: React.ReactNode;
   fullWidth?: boolean;
   maxLength?: number;
+  ariaDescribedBy?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -44,11 +45,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       size = "medium",
       disabled = false,
       className,
+      ariaDescribedBy,
       "data-testid": dataTestId,
       ...rest
     },
     ref
   ) => {
+    const uniqueId = useId();
+    const helperTextId = helperText ? `helper-${uniqueId}` : undefined;
+    const describedBy = [ariaDescribedBy, helperTextId]
+      .filter(Boolean)
+      .join(" ") || undefined;
+
     return (
       <TextField
         ref={ref}
@@ -70,6 +78,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         inputProps={{
           "data-testid": dataTestId,
           maxLength,
+          "aria-invalid": error,
+          "aria-describedby": describedBy,
+        }}
+        FormHelperTextProps={{
+          id: helperTextId,
         }}
         InputProps={{
           startAdornment: startIcon ? (
