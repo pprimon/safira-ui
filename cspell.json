@@ -1,0 +1,102 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en,pt,pt-BR",
+  "words": [
+    "Safira",
+    "safira",
+    "autodocs",
+    "fullwidth",
+    "fullWidth",
+    "startIcon",
+    "endIcon",
+    "testid",
+    "rgba",
+    "chakra",
+    "clsx",
+    "focusable",
+    "focusring",
+    "headlessui",
+    "labelledby",
+    "listbox",
+    "menuitem",
+    "popper",
+    "radix",
+    "reakit",
+    "renderprop",
+    "themeable",
+    "treeview",
+    "typeahead",
+    "unstable",
+    "composable",
+    "composables",
+    "composability",
+    "customizable",
+    "customization",
+    "customizations",
+    "pressable",
+    "dismissable",
+    "popover",
+    "tooltip",
+    "tooltips",
+    "listitem",
+    "tabpanel",
+    "tablist",
+    "combobox",
+    "multiselect",
+    "selectall",
+    "autosize",
+    "autofocus",
+    "keydown",
+    "keyup",
+    "mouseenter",
+    "mouseleave",
+    "mousedown",
+    "mouseup",
+    "touchstart",
+    "touchend",
+    "focusin",
+    "focusout"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "*.snap",
+    "package-lock.json",
+    "*.min.js",
+    "*.min.css"
+  ],
+  "dictionaries": [
+    "typescript",
+    "javascript",
+    "html",
+    "css",
+    "npm",
+    "node",
+    "react"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "react",
+      "path": "./node_modules/@cspell/dict-react/cspell-ext.json"
+    }
+  ],
+  "overrides": [
+    {
+      "filename": "**/*.{ts,tsx}",
+      "words": [
+        "Pressable",
+        "Dismissable",
+        "Composable",
+        "Themeable"
+      ]
+    },
+    {
+      "filename": "**/*.mdx",
+      "language": "en,pt,pt-BR"
+    }
+  ],
+  "import": []
+}

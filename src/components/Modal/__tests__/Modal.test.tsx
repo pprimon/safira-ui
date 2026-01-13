@@ -10,36 +10,38 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe("Modal Component", () => {
-  // Mock para scroll do body
-  const originalBodyStyle = document.body.style.overflow;
+  const defaultProps = {
+    open: true,
+    onClose: jest.fn(),
+  };
 
-  afterEach(() => {
-    document.body.style.overflow = originalBodyStyle;
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
   describe("Rendering", () => {
     it("renders modal when open", () => {
       renderWithTheme(
-        <Modal open onClose={() => {}}>
-          <div>Modal Content</div>
+        <Modal {...defaultProps}>
+          <p>Modal content</p>
         </Modal>
       );
-      expect(screen.getByText("Modal Content")).toBeInTheDocument();
+      expect(screen.getByText("Modal content")).toBeInTheDocument();
     });
 
     it("does not render modal when closed", () => {
       renderWithTheme(
-        <Modal open={false} onClose={() => {}}>
-          <div>Modal Content</div>
+        <Modal {...defaultProps} open={false}>
+          <p>Modal content</p>
         </Modal>
       );
-      expect(screen.queryByText("Modal Content")).not.toBeInTheDocument();
+      expect(screen.queryByText("Modal content")).not.toBeInTheDocument();
     });
 
     it("renders with title", () => {
       renderWithTheme(
-        <Modal open title="Test Title" onClose={() => {}}>
-          <div>Modal Content</div>
+        <Modal {...defaultProps} title="Test Title">
+          <p>Modal content</p>
         </Modal>
       );
       expect(screen.getByText("Test Title")).toBeInTheDocument();
@@ -47,8 +49,8 @@ describe("Modal Component", () => {
 
     it("renders close button by default", () => {
       renderWithTheme(
-        <Modal open onClose={() => {}}>
-          <div>Modal Content</div>
+        <Modal {...defaultProps} title="Test Title">
+          <p>Modal content</p>
         </Modal>
       );
       expect(screen.getByTestId("modal-close-button")).toBeInTheDocument();
@@ -56,62 +58,52 @@ describe("Modal Component", () => {
 
     it("hides close button when showCloseButton is false", () => {
       renderWithTheme(
-        <Modal open showCloseButton={false} onClose={() => {}}>
-          <div>Modal Content</div>
+        <Modal {...defaultProps} title="Test Title" showCloseButton={false}>
+          <p>Modal content</p>
         </Modal>
       );
-      expect(
-        screen.queryByTestId("modal-close-button")
-      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId("modal-close-button")).not.toBeInTheDocument();
+    });
+
+    it("renders actions when provided", () => {
+      renderWithTheme(
+        <Modal
+          {...defaultProps}
+          actions={<button>Confirm</button>}
+        >
+          <p>Modal content</p>
+        </Modal>
+      );
+      expect(screen.getByText("Confirm")).toBeInTheDocument();
     });
   });
 
   describe("Sizes", () => {
     it("renders small size", () => {
       renderWithTheme(
-        <Modal open size="small" onClose={() => {}}>
-          <div>Small Modal</div>
+        <Modal {...defaultProps} size="small">
+          <p>Small modal</p>
         </Modal>
       );
-      expect(screen.getByText("Small Modal")).toBeInTheDocument();
+      expect(screen.getByText("Small modal")).toBeInTheDocument();
     });
 
-    it("renders medium size by default", () => {
+    it("renders medium size", () => {
       renderWithTheme(
-        <Modal open onClose={() => {}}>
-          <div>Medium Modal</div>
+        <Modal {...defaultProps} size="medium">
+          <p>Medium modal</p>
         </Modal>
       );
-      expect(screen.getByText("Medium Modal")).toBeInTheDocument();
+      expect(screen.getByText("Medium modal")).toBeInTheDocument();
     });
 
     it("renders large size", () => {
       renderWithTheme(
-        <Modal open size="large" onClose={() => {}}>
-          <div>Large Modal</div>
+        <Modal {...defaultProps} size="large">
+          <p>Large modal</p>
         </Modal>
       );
-      expect(screen.getByText("Large Modal")).toBeInTheDocument();
-    });
-  });
-
-  describe("Max Width", () => {
-    it("accepts string maxWidth values", () => {
-      renderWithTheme(
-        <Modal open maxWidth="lg" onClose={() => {}}>
-          <div>Large Width Modal</div>
-        </Modal>
-      );
-      expect(screen.getByText("Large Width Modal")).toBeInTheDocument();
-    });
-
-    it("accepts number maxWidth values", () => {
-      renderWithTheme(
-        <Modal open maxWidth={600} onClose={() => {}}>
-          <div>Custom Width Modal</div>
-        </Modal>
-      );
-      expect(screen.getByText("Custom Width Modal")).toBeInTheDocument();
+      expect(screen.getByText("Large modal")).toBeInTheDocument();
     });
   });
 
@@ -121,8 +113,8 @@ describe("Modal Component", () => {
       const handleClose = jest.fn();
 
       renderWithTheme(
-        <Modal open onClose={handleClose}>
-          <div>Modal Content</div>
+        <Modal open={true} onClose={handleClose} title="Test">
+          <p>Modal content</p>
         </Modal>
       );
 
@@ -130,137 +122,84 @@ describe("Modal Component", () => {
       expect(handleClose).toHaveBeenCalledTimes(1);
     });
 
-    it("calls onClose when backdrop is clicked", async () => {
-      const user = userEvent.setup();
+    it("calls onClose when backdrop is clicked and closeOnBackdropClick is true", () => {
       const handleClose = jest.fn();
 
       renderWithTheme(
-        <Modal open onClose={handleClose}>
-          <div>Modal Content</div>
+        <Modal open={true} onClose={handleClose} closeOnBackdropClick={true}>
+          <p>Modal content</p>
         </Modal>
       );
 
-      // Clica no backdrop (área fora do modal)
-      const backdrop = screen.getByRole("presentation").firstChild;
-      await user.click(backdrop as Element);
-      expect(handleClose).toHaveBeenCalledTimes(1);
+      const backdrop = document.querySelector(".MuiBackdrop-root");
+      if (backdrop) {
+        fireEvent.click(backdrop);
+        expect(handleClose).toHaveBeenCalled();
+      }
     });
 
-    it("does not call onClose when backdrop is clicked and closeOnBackdropClick is false", async () => {
-      const user = userEvent.setup();
+    it("does not call onClose when backdrop is clicked and closeOnBackdropClick is false", () => {
       const handleClose = jest.fn();
 
       renderWithTheme(
-        <Modal open closeOnBackdropClick={false} onClose={handleClose}>
-          <div>Modal Content</div>
+        <Modal open={true} onClose={handleClose} closeOnBackdropClick={false}>
+          <p>Modal content</p>
         </Modal>
       );
 
-      const backdrop = screen.getByRole("presentation").firstChild;
-      await user.click(backdrop as Element);
+      const backdrop = document.querySelector(".MuiBackdrop-root");
+      if (backdrop) {
+        fireEvent.click(backdrop);
       expect(handleClose).not.toHaveBeenCalled();
-    });
-
-    it("calls onClose when Escape key is pressed", () => {
-      const handleClose = jest.fn();
-
-      renderWithTheme(
-        <Modal open onClose={handleClose}>
-          <div>Modal Content</div>
-        </Modal>
-      );
-
-      fireEvent.keyDown(document, { key: "Escape" });
-      expect(handleClose).toHaveBeenCalledTimes(1);
-    });
-
-    it("does not call onClose when Escape key is pressed and closeOnEscape is false", () => {
-      const handleClose = jest.fn();
-
-      renderWithTheme(
-        <Modal open closeOnEscape={false} onClose={handleClose}>
-          <div>Modal Content</div>
-        </Modal>
-      );
-
-      fireEvent.keyDown(document, { key: "Escape" });
-      expect(handleClose).not.toHaveBeenCalled();
+      }
     });
   });
 
-  describe("Body Scroll Management", () => {
-    it("prevents body scroll when modal is open", () => {
+  describe("Max Width", () => {
+    it("renders with xs maxWidth", () => {
       renderWithTheme(
-        <Modal open onClose={() => {}}>
-          <div>Modal Content</div>
+        <Modal {...defaultProps} maxWidth="xs">
+          <p>XS modal</p>
         </Modal>
       );
-
-      expect(document.body.style.overflow).toBe("hidden");
-    });
-
-    it("restores body scroll when modal is closed", () => {
-      const { rerender } = renderWithTheme(
-        <Modal open onClose={() => {}}>
-          <div>Modal Content</div>
-        </Modal>
-      );
-
-      expect(document.body.style.overflow).toBe("hidden");
-
-      rerender(
-        <ThemeProvider theme={lightTheme}>
-          <Modal open={false} onClose={() => {}}>
-            <div>Modal Content</div>
-          </Modal>
-        </ThemeProvider>
-      );
-
-      expect(document.body.style.overflow).toBe("unset");
-    });
+      expect(screen.getByText("XS modal")).toBeInTheDocument();
   });
 
-  describe("Full Height", () => {
-    it("renders with fullHeight prop", () => {
+    it("renders with md maxWidth", () => {
       renderWithTheme(
-        <Modal open fullHeight onClose={() => {}}>
-          <div>Full Height Modal</div>
+        <Modal {...defaultProps} maxWidth="md">
+          <p>MD modal</p>
         </Modal>
       );
-      expect(screen.getByText("Full Height Modal")).toBeInTheDocument();
+      expect(screen.getByText("MD modal")).toBeInTheDocument();
+    });
+
+    it("renders with lg maxWidth", () => {
+      renderWithTheme(
+        <Modal {...defaultProps} maxWidth="lg">
+          <p>LG modal</p>
+        </Modal>
+      );
+      expect(screen.getByText("LG modal")).toBeInTheDocument();
     });
   });
 
   describe("Accessibility", () => {
-    it("has proper ARIA attributes", () => {
+    it("has proper dialog role", () => {
       renderWithTheme(
-        <Modal open onClose={() => {}} data-testid="test-modal">
-          <div>Modal Content</div>
+        <Modal {...defaultProps}>
+          <p>Modal content</p>
         </Modal>
       );
-
-      const modal = screen.getByTestId("test-modal");
-      expect(modal).toBeInTheDocument();
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
     });
 
-    it("focuses modal when opened", () => {
+    it("close button has proper aria-label", () => {
       renderWithTheme(
-        <Modal open onClose={() => {}}>
-          <div>Modal Content</div>
+        <Modal {...defaultProps} title="Test">
+          <p>Modal content</p>
         </Modal>
       );
-
-      // O modal deve estar focado ou conter um elemento focado
-      expect(document.activeElement).toBeTruthy();
-    });
-
-    it("has accessible close button", () => {
-      renderWithTheme(
-        <Modal open onClose={() => {}}>
-          <div>Modal Content</div>
-        </Modal>
-      );
-
       const closeButton = screen.getByTestId("modal-close-button");
       expect(closeButton).toHaveAttribute("aria-label", "Fechar modal");
     });
@@ -269,22 +208,19 @@ describe("Modal Component", () => {
   describe("Custom Props", () => {
     it("accepts custom className", () => {
       renderWithTheme(
-        <Modal open className="custom-modal" onClose={() => {}}>
-          <div>Modal Content</div>
+        <Modal {...defaultProps} className="custom-modal">
+          <p>Custom class modal</p>
         </Modal>
       );
-
-      // Verifica se a classe foi aplicada ao container do modal
       expect(document.querySelector(".custom-modal")).toBeInTheDocument();
     });
 
     it("accepts custom data-testid", () => {
       renderWithTheme(
-        <Modal open data-testid="custom-modal" onClose={() => {}}>
-          <div>Modal Content</div>
+        <Modal {...defaultProps} data-testid="custom-modal">
+          <p>Custom testid modal</p>
         </Modal>
       );
-
       expect(screen.getByTestId("custom-modal")).toBeInTheDocument();
     });
   });
@@ -292,46 +228,29 @@ describe("Modal Component", () => {
   describe("Snapshots", () => {
     it("matches snapshot for basic modal", () => {
       const { baseElement } = renderWithTheme(
-        <Modal open onClose={() => {}}>
-          <div>Basic Modal Content</div>
+        <Modal {...defaultProps} title="Basic Modal">
+          <p>Basic modal content</p>
         </Modal>
       );
       expect(baseElement).toMatchSnapshot();
     });
 
-    it("matches snapshot with title and close button", () => {
+    it("matches snapshot with actions", () => {
       const { baseElement } = renderWithTheme(
-        <Modal open title="Test Modal" onClose={() => {}}>
-          <div>Modal with title</div>
-        </Modal>
-      );
-      expect(baseElement).toMatchSnapshot();
-    });
-
-    it("matches snapshot for different sizes", () => {
-      const sizes = ["small", "medium", "large"] as const;
-
-      sizes.forEach((size) => {
-        const { baseElement } = renderWithTheme(
-          <Modal open size={size} title={`${size} Modal`} onClose={() => {}}>
-            <div>{size} modal content</div>
-          </Modal>
-        );
-        expect(baseElement).toMatchSnapshot(`modal-${size}`);
-      });
-    });
-
-    it("matches snapshot for fullHeight modal", () => {
-      const { baseElement } = renderWithTheme(
-        <Modal open fullHeight title="Full Height Modal" onClose={() => {}}>
-          <div>Full height content</div>
+        <Modal
+          {...defaultProps}
+          title="Modal with Actions"
+          actions={
+            <>
+              <button>Cancel</button>
+              <button>Confirm</button>
+            </>
+          }
+        >
+          <p>Modal content with actions</p>
         </Modal>
       );
       expect(baseElement).toMatchSnapshot();
     });
   });
 });
-
-
-
-

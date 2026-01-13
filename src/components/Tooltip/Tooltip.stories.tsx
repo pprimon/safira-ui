@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tooltip } from "../src/components/Tooltip";
-import { Button } from "../src/components/Button";
+import { Tooltip } from "./Tooltip";
+import { Button } from "../Button/Button";
 import { IconButton } from "@mui/material";
 import { Info, Help, Warning, Error, CheckCircle } from "@mui/icons-material";
 
 const meta: Meta<typeof Tooltip> = {
-  title: "Components/Tooltip",
   component: Tooltip,
+  title: "Components/Tooltip",
   parameters: {
     layout: "centered",
     docs: {
@@ -23,7 +23,6 @@ const meta: Meta<typeof Tooltip> = {
       </div>
     ),
   ],
-  tags: ["autodocs"],
   argTypes: {
     placement: {
       control: { type: "select" },
@@ -38,35 +37,55 @@ const meta: Meta<typeof Tooltip> = {
         "bottom-end",
       ],
       description: "Posição do tooltip",
+      table: { category: "Posicionamento", defaultValue: { summary: "top" } },
     },
     variant: {
       control: { type: "select" },
       options: ["default", "light", "error", "warning", "success", "info"],
       description: "Variante visual do tooltip",
+      table: { category: "Aparência", defaultValue: { summary: "default" } },
     },
     enterDelay: {
       control: { type: "number" },
       description: "Delay para mostrar o tooltip (ms)",
+      table: { category: "Comportamento", defaultValue: { summary: "700" } },
     },
     leaveDelay: {
       control: { type: "number" },
       description: "Delay para esconder o tooltip (ms)",
+      table: { category: "Comportamento", defaultValue: { summary: "0" } },
     },
     followCursor: {
       control: "boolean",
       description: "Se deve seguir o cursor",
+      table: { category: "Comportamento", defaultValue: { summary: "false" } },
     },
     maxWidth: {
       control: { type: "number" },
       description: "Largura máxima do tooltip",
+      table: { category: "Aparência", defaultValue: { summary: "300" } },
     },
+    title: {
+      control: "text",
+      description: "Conteúdo do tooltip",
+      table: { category: "Conteúdo" },
+    },
+  },
+  args: {
+    placement: "top",
+    variant: "default",
+    enterDelay: 700,
+    leaveDelay: 0,
+    followCursor: false,
+    maxWidth: 300,
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Tooltip>;
 
 export const Default: Story = {
+  name: "Padrão",
   args: {
     title: "Informação útil sobre este elemento",
     children: <Button>Hover aqui</Button>,
@@ -74,6 +93,7 @@ export const Default: Story = {
 };
 
 export const Placements: Story = {
+  name: "Posições",
   render: () => (
     <div
       style={{
@@ -121,6 +141,7 @@ export const Placements: Story = {
 };
 
 export const Variants: Story = {
+  name: "Variantes",
   render: () => (
     <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
       <Tooltip title="Tooltip padrão" variant="default">
@@ -163,6 +184,7 @@ export const Variants: Story = {
 };
 
 export const LongText: Story = {
+  name: "Texto Longo",
   args: {
     title:
       "Este é um tooltip com muito texto que demonstra como o componente lida com conteúdo longo. O texto será quebrado automaticamente quando atingir a largura máxima configurada.",
@@ -172,6 +194,7 @@ export const LongText: Story = {
 };
 
 export const CustomDelay: Story = {
+  name: "Delays Customizados",
   render: () => (
     <div style={{ display: "flex", gap: "16px" }}>
       <Tooltip title="Aparece rapidamente (100ms)" enterDelay={100}>
@@ -190,6 +213,7 @@ export const CustomDelay: Story = {
 };
 
 export const FollowCursor: Story = {
+  name: "Seguir Cursor",
   args: {
     title: "Este tooltip segue o cursor do mouse",
     followCursor: true,
@@ -198,6 +222,7 @@ export const FollowCursor: Story = {
 };
 
 export const AlwaysVisible: Story = {
+  name: "Sempre Visível",
   args: {
     title: "Tooltip sempre visível",
     open: true,
@@ -205,7 +230,8 @@ export const AlwaysVisible: Story = {
   },
 };
 
-export const WithIcon: Story = {
+export const WithIcons: Story = {
+  name: "Com Ícones",
   render: () => (
     <div style={{ display: "flex", gap: "16px" }}>
       <Tooltip title="Informações do usuário">
@@ -224,6 +250,7 @@ export const WithIcon: Story = {
 };
 
 export const DifferentMaxWidths: Story = {
+  name: "Larguras Diferentes",
   render: () => (
     <div style={{ display: "flex", gap: "16px" }}>
       <Tooltip

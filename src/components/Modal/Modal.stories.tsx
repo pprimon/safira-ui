@@ -1,14 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-// Mock function for actions
-const fn = () => () => {};
-import { Modal } from "../src/components/Modal";
-import { Button } from "../src/components/Button";
-import { Input } from "../src/components/Input";
 import { useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Modal } from "./Modal";
+import { Button } from "../Button/Button";
+import { Input } from "../Input/Input";
 
 const meta: Meta<typeof Modal> = {
-  title: "Components/Modal",
   component: Modal,
+  title: "Components/Modal",
   parameters: {
     layout: "centered",
     docs: {
@@ -18,45 +16,73 @@ const meta: Meta<typeof Modal> = {
       },
     },
   },
-  tags: ["autodocs"],
   argTypes: {
+    open: {
+      control: "boolean",
+      description: "Se o modal está aberto",
+      table: { category: "Estado" },
+    },
+    title: {
+      control: "text",
+      description: "Título do modal",
+      table: { category: "Conteúdo" },
+    },
     size: {
       control: { type: "select" },
       options: ["small", "medium", "large"],
       description: "Tamanho do modal",
+      table: { category: "Aparência", defaultValue: { summary: "medium" } },
     },
     maxWidth: {
       control: { type: "select" },
       options: ["xs", "sm", "md", "lg", "xl"],
       description: "Largura máxima do modal",
+      table: { category: "Aparência", defaultValue: { summary: "sm" } },
     },
     showCloseButton: {
       control: "boolean",
       description: "Se deve mostrar o botão de fechar",
+      table: { category: "Comportamento", defaultValue: { summary: "true" } },
     },
     closeOnBackdropClick: {
       control: "boolean",
       description: "Se deve fechar ao clicar no backdrop",
+      table: { category: "Comportamento", defaultValue: { summary: "true" } },
     },
     closeOnEscape: {
       control: "boolean",
       description: "Se deve fechar ao pressionar ESC",
+      table: { category: "Comportamento", defaultValue: { summary: "true" } },
     },
     fullHeight: {
       control: "boolean",
       description: "Se o modal deve ocupar toda a altura",
+      table: { category: "Aparência", defaultValue: { summary: "false" } },
+    },
+    onClose: {
+      action: "onClose",
+      description: "Função executada ao fechar o modal",
+      table: { category: "Comportamento" },
     },
   },
   args: {
-    onClose: fn(),
+    open: false,
+    title: "Título do Modal",
+    size: "medium",
+    maxWidth: "sm",
+    showCloseButton: true,
+    closeOnBackdropClick: true,
+    closeOnEscape: true,
+    fullHeight: false,
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
-  render: () => {
+  name: "Padrão",
+  render: function DefaultStory() {
     const [open, setOpen] = useState(false);
 
     return (
@@ -71,15 +97,46 @@ export const Default: Story = {
   },
 };
 
+export const WithActions: Story = {
+  name: "Com Ações",
+  render: function WithActionsStory() {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Modal com Ações</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Confirmar Ação"
+          actions={
+            <>
+              <Button variant="ghost" onClick={() => setOpen(false)}>
+                Cancelar
+              </Button>
+              <Button variant="primary" onClick={() => setOpen(false)}>
+                Confirmar
+              </Button>
+            </>
+          }
+        >
+          <p>Tem certeza que deseja continuar com esta ação?</p>
+        </Modal>
+      </>
+    );
+  },
+};
+
 export const WithoutTitle: Story = {
-  render: () => {
+  name: "Sem Título",
+  render: function WithoutTitleStory() {
     const [open, setOpen] = useState(false);
 
     return (
       <>
         <Button onClick={() => setOpen(true)}>Modal sem Título</Button>
         <Modal open={open} onClose={() => setOpen(false)}>
-          <h2 style={{ margin: "0 0 16px 0", color: "#EBE54B" }}>
+          <h2 style={{ margin: "0 0 16px 0", color: "#572F93" }}>
             Título Customizado
           </h2>
           <p>Modal sem título padrão, mas com conteúdo customizado.</p>
@@ -90,7 +147,8 @@ export const WithoutTitle: Story = {
 };
 
 export const Sizes: Story = {
-  render: () => {
+  name: "Tamanhos",
+  render: function SizesStory() {
     const [openSmall, setOpenSmall] = useState(false);
     const [openMedium, setOpenMedium] = useState(false);
     const [openLarge, setOpenLarge] = useState(false);
@@ -136,7 +194,8 @@ export const Sizes: Story = {
 };
 
 export const WithForm: Story = {
-  render: () => {
+  name: "Com Formulário",
+  render: function WithFormStory() {
     const [open, setOpen] = useState(false);
 
     return (
@@ -147,6 +206,14 @@ export const WithForm: Story = {
           onClose={() => setOpen(false)}
           title="Cadastro de Usuário"
           maxWidth="md"
+          actions={
+            <>
+              <Button variant="ghost" onClick={() => setOpen(false)}>
+                Cancelar
+              </Button>
+              <Button variant="primary">Cadastrar</Button>
+            </>
+          }
         >
           <div
             style={{ display: "flex", flexDirection: "column", gap: "16px" }}
@@ -164,19 +231,6 @@ export const WithForm: Story = {
               placeholder="Digite sua senha"
               fullWidth
             />
-            <div
-              style={{
-                display: "flex",
-                gap: "12px",
-                justifyContent: "flex-end",
-                marginTop: "16px",
-              }}
-            >
-              <Button variant="ghost" onClick={() => setOpen(false)}>
-                Cancelar
-              </Button>
-              <Button variant="primary">Cadastrar</Button>
-            </div>
           </div>
         </Modal>
       </>
@@ -185,7 +239,8 @@ export const WithForm: Story = {
 };
 
 export const Confirmation: Story = {
-  render: () => {
+  name: "Confirmação",
+  render: function ConfirmationStory() {
     const [open, setOpen] = useState(false);
 
     return (
@@ -199,26 +254,21 @@ export const Confirmation: Story = {
           title="Confirmar Exclusão"
           size="small"
           maxWidth="sm"
+          actions={
+            <>
+              <Button variant="ghost" onClick={() => setOpen(false)}>
+                Cancelar
+              </Button>
+              <Button variant="danger" onClick={() => setOpen(false)}>
+                Excluir
+              </Button>
+            </>
+          }
         >
           <p>Tem certeza que deseja excluir este item?</p>
           <p style={{ color: "#F44336", fontSize: "0.875rem" }}>
             Esta ação não pode ser desfeita.
           </p>
-          <div
-            style={{
-              display: "flex",
-              gap: "12px",
-              justifyContent: "flex-end",
-              marginTop: "24px",
-            }}
-          >
-            <Button variant="ghost" onClick={() => setOpen(false)}>
-              Cancelar
-            </Button>
-            <Button variant="primary" onClick={() => setOpen(false)}>
-              Excluir
-            </Button>
-          </div>
         </Modal>
       </>
     );
@@ -226,7 +276,8 @@ export const Confirmation: Story = {
 };
 
 export const NoCloseButton: Story = {
-  render: () => {
+  name: "Sem Botão Fechar",
+  render: function NoCloseButtonStory() {
     const [open, setOpen] = useState(false);
 
     return (
@@ -239,20 +290,44 @@ export const NoCloseButton: Story = {
           showCloseButton={false}
           closeOnBackdropClick={false}
           closeOnEscape={false}
-        >
-          <p>Este modal só pode ser fechado através dos botões de ação.</p>
-          <div
-            style={{
-              display: "flex",
-              gap: "12px",
-              justifyContent: "flex-end",
-              marginTop: "24px",
-            }}
-          >
+          actions={
             <Button variant="primary" onClick={() => setOpen(false)}>
               Fechar
             </Button>
-          </div>
+          }
+        >
+          <p>Este modal só pode ser fechado através dos botões de ação.</p>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const FullWidth: Story = {
+  name: "Largura Total",
+  render: function FullWidthStory() {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Modal Largo</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Modal de Largura Total"
+          maxWidth="lg"
+          fullWidth
+          actions={
+            <Button variant="primary" onClick={() => setOpen(false)}>
+              Fechar
+            </Button>
+          }
+        >
+          <p>
+            Este modal usa a largura máxima "lg" e ocupa toda a largura
+            disponível.
+          </p>
+          <p>Útil para exibir tabelas, gráficos ou conteúdo extenso.</p>
         </Modal>
       </>
     );

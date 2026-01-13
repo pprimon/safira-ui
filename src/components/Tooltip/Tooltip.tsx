@@ -1,255 +1,130 @@
 import React from "react";
-import {
-  Tooltip as MuiTooltip,
-  TooltipProps as MuiTooltipProps,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Tooltip as MuiTooltip, Zoom } from "@mui/material";
+import type { TooltipProps as MuiTooltipProps } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import type { BaseComponentProps, Position } from "../../types";
-import {
-  colors,
-  borderRadius,
-  spacing,
-  shadows,
-  transitions,
-  typography,
-} from "../../theme";
+import { colors } from "../../theme/tokens";
 
-export interface TooltipProps extends BaseComponentProps {
-  /**
-   * Elemento que ativa o tooltip
-   */
-  children: React.ReactElement;
-  /**
-   * Conteúdo do tooltip
-   */
+export type TooltipVariant =
+  | "default"
+  | "light"
+  | "error"
+  | "warning"
+  | "success"
+  | "info";
+
+export interface TooltipProps
+  extends BaseComponentProps,
+    Omit<MuiTooltipProps, "title" | "children" | "placement"> {
   title: React.ReactNode;
-  /**
-   * Posição do tooltip
-   */
+  children: React.ReactElement;
   placement?: Position;
-  /**
-   * Se o tooltip está sempre visível
-   */
-  open?: boolean;
-  /**
-   * Callback quando o tooltip abre
-   */
-  onOpen?: () => void;
-  /**
-   * Callback quando o tooltip fecha
-   */
-  onClose?: () => void;
-  /**
-   * Delay para mostrar o tooltip (ms)
-   */
+  variant?: TooltipVariant;
   enterDelay?: number;
-  /**
-   * Delay para esconder o tooltip (ms)
-   */
   leaveDelay?: number;
-  /**
-   * Se deve seguir o cursor
-   */
   followCursor?: boolean;
-  /**
-   * Variante visual do tooltip
-   */
-  variant?: "default" | "light" | "error" | "warning" | "success" | "info";
-  /**
-   * Tamanho máximo do tooltip
-   */
   maxWidth?: number;
+  open?: boolean;
 }
 
-const StyledTooltip = styled(MuiTooltip, {
-  shouldForwardProp: (prop) =>
-    !["variant", "maxWidth"].includes(prop as string),
-})<{ variant?: TooltipProps["variant"]; maxWidth?: number }>(
-  ({ theme, variant = "default", maxWidth = 300 }) => {
-    const variantStyles = {
-      default: {
-        backgroundColor: colors.background.main,
-        color: colors.accent.main,
-        border: `1px solid ${colors.primary.light}30`,
-      },
-      light: {
-        backgroundColor: "#FFFFFF",
-        color: colors.text.primary,
-        border: `2px solid ${colors.surface.main}`,
-      },
-      error: {
-        backgroundColor: colors.error.main,
-        color: "#FFFFFF",
-        border: `1px solid ${colors.error.dark}`,
-      },
-      warning: {
-        backgroundColor: colors.warning.main,
-        color: colors.text.primary,
-        border: `1px solid ${colors.warning.dark}`,
-      },
-      success: {
-        backgroundColor: colors.success.main,
-        color: "#FFFFFF",
-        border: `1px solid ${colors.success.dark}`,
-      },
-      info: {
-        backgroundColor: colors.info.main,
-        color: "#FFFFFF",
-        border: `1px solid ${colors.info.dark}`,
-      },
-    };
-
-    return {
-      "& .MuiTooltip-tooltip": {
-        ...variantStyles[variant],
-        fontSize: typography.fontSize.sm,
-        fontWeight: typography.fontWeight.semibold,
-        padding: `${spacing.md} ${spacing.lg}`,
-        borderRadius: borderRadius.xl,
-        boxShadow: shadows.xl,
-        maxWidth: `${maxWidth}px`,
-        lineHeight: typography.lineHeight.normal,
-        letterSpacing: "0.025em",
-        transition: `all ${transitions.duration.shorter}ms ${transitions.easing.easeInOut}`,
-        '&[data-popper-placement*="bottom"] .MuiTooltip-arrow': {
-          top: 0,
-          left: 0,
-          marginTop: "-0.71em",
-          width: "3em",
-          height: "1em",
-          "&::before": {
-            borderWidth: "0 1em 1em 1em",
-            borderColor: `transparent transparent ${variantStyles[variant].backgroundColor} transparent`,
-          },
-        },
-        '&[data-popper-placement*="top"] .MuiTooltip-arrow': {
-          bottom: 0,
-          left: 0,
-          marginBottom: "-0.71em",
-          width: "3em",
-          height: "1em",
-          "&::before": {
-            borderWidth: "1em 1em 0 1em",
-            borderColor: `${variantStyles[variant].backgroundColor} transparent transparent transparent`,
-          },
-        },
-        '&[data-popper-placement*="right"] .MuiTooltip-arrow': {
-          left: 0,
-          marginLeft: "-0.71em",
-          height: "3em",
-          width: "1em",
-          "&::before": {
-            borderWidth: "1em 1em 1em 0",
-            borderColor: `transparent ${variantStyles[variant].backgroundColor} transparent transparent`,
-          },
-        },
-        '&[data-popper-placement*="left"] .MuiTooltip-arrow': {
-          right: 0,
-          marginRight: "-0.71em",
-          height: "3em",
-          width: "1em",
-          "&::before": {
-            borderWidth: "1em 0 1em 1em",
-            borderColor: `transparent transparent transparent ${variantStyles[variant].backgroundColor}`,
-          },
-        },
-      },
-      "& .MuiTooltip-arrow": {
-        overflow: "hidden",
-        position: "absolute",
-        width: "1em",
-        height: "0.71em",
-        boxSizing: "border-box",
-        color: variantStyles[variant].backgroundColor,
-        "&::before": {
-          content: '""',
-          margin: "auto",
-          display: "block",
-          width: 0,
-          height: 0,
-          borderStyle: "solid",
-        },
-      },
-    };
-  }
-);
-
-/**
- * Componente Tooltip do Safira UI
- *
- * Tooltip moderno com múltiplas variantes, posicionamento flexível e animações suaves.
- * Baseado no Tooltip do Material UI com customizações para a identidade visual do Safira UI.
- *
- * @example
- * ```tsx
- * <Tooltip title="Informação útil" placement="top">
- *   <Button>Hover aqui</Button>
- * </Tooltip>
- *
- * <Tooltip
- *   title="Erro crítico detectado"
- *   variant="error"
- *   placement="bottom"
- *   enterDelay={500}
- * >
- *   <IconButton>
- *     <ErrorIcon />
- *   </IconButton>
- * </Tooltip>
- *
- * <Tooltip
- *   title="Este é um tooltip com muito texto que pode quebrar em múltiplas linhas"
- *   maxWidth={200}
- *   variant="light"
- * >
- *   <span>Texto com tooltip longo</span>
- * </Tooltip>
- * ```
- */
 export const Tooltip: React.FC<TooltipProps> = ({
-  children,
   title,
+  children,
   placement = "top",
-  open,
-  onOpen,
-  onClose,
+  variant = "default",
   enterDelay = 700,
   leaveDelay = 0,
   followCursor = false,
-  variant = "default",
   maxWidth = 300,
-  duration = transitions.duration.shorter,
+  open,
   className,
   "data-testid": dataTestId,
+  ...rest
 }) => {
-  // Converter placement do nosso tipo para o tipo do MUI
-  const muiPlacement = placement as MuiTooltipProps["placement"];
+  const theme = useTheme();
+
+  const getVariantStyles = () => {
+    const variants = {
+      default: {
+        backgroundColor: colors.background.dark,
+        color: colors.white,
+      },
+      light: {
+        backgroundColor: colors.white,
+        color: colors.text.primary,
+        border: `1px solid ${colors.primary.light}`,
+      },
+      error: {
+        backgroundColor: colors.error.main,
+        color: colors.white,
+      },
+      warning: {
+        backgroundColor: colors.warning.main,
+        color: colors.warning.contrastText,
+      },
+      success: {
+        backgroundColor: colors.success.main,
+        color: colors.white,
+      },
+      info: {
+        backgroundColor: colors.info.main,
+        color: colors.white,
+      },
+    };
+    return variants[variant];
+  };
+
+  const getMuiPlacement = (
+    pos: Position
+  ): MuiTooltipProps["placement"] => {
+    const placements: Record<Position, MuiTooltipProps["placement"]> = {
+      top: "top",
+      bottom: "bottom",
+      left: "left",
+      right: "right",
+      "top-start": "top-start",
+      "top-end": "top-end",
+      "bottom-start": "bottom-start",
+      "bottom-end": "bottom-end",
+    };
+    return placements[pos];
+  };
 
   return (
-    <StyledTooltip
+    <MuiTooltip
       title={title}
-      placement={muiPlacement}
-      open={open}
-      onOpen={onOpen}
-      onClose={onClose}
+      placement={getMuiPlacement(placement)}
       enterDelay={enterDelay}
       leaveDelay={leaveDelay}
       followCursor={followCursor}
-      variant={variant}
-      maxWidth={maxWidth}
-      arrow
+      open={open}
+      TransitionComponent={Zoom}
+      TransitionProps={{ timeout: theme.transitions.duration.shorter }}
       className={className}
+      data-testid={dataTestId}
       componentsProps={{
         tooltip: {
-          "data-testid": dataTestId,
+          sx: {
+            ...getVariantStyles(),
+            maxWidth,
+            fontSize: theme.typography.body2.fontSize,
+            fontWeight: theme.typography.fontWeightMedium,
+            padding: theme.spacing(1, 1.5),
+            borderRadius: 2,
+            boxShadow: theme.shadows[4],
+          },
         },
-        transition: {
-          timeout: duration,
+        arrow: {
+          sx: {
+            color: getVariantStyles().backgroundColor,
+          },
         },
       }}
+      arrow
+      {...rest}
     >
       {children}
-    </StyledTooltip>
+    </MuiTooltip>
   );
 };
 

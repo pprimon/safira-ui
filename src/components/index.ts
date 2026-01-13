@@ -1,20 +1,18 @@
-// Componentes
 export { Button } from './Button/Button';
-export { Input } from './Input';
-export { Select } from './Select';
-export { Modal } from './Modal';
-export { Tooltip } from './Tooltip';
+export { Input } from './Input/Input';
+export { Select } from './Select/Select';
+export { Modal } from './Modal/Modal';
+export { Tooltip } from './Tooltip/Tooltip';
 export { Alert } from './Alert/Alert';
 export { Card } from './Card/Card';
 export { Badge } from './Badge/Badge';
 
-// Tipos
 export type { ButtonProps } from './Button/Button';
 export type { ButtonVariant, ButtonSize } from './Button/Button.theme';
-export type { InputProps } from './Input';
-export type { SelectProps, SelectOption } from './Select';
-export type { ModalProps } from './Modal';
-export type { TooltipProps } from './Tooltip';
+export type { InputProps } from './Input/Input';
+export type { SelectProps, SelectOption } from './Select/Select';
+export type { ModalProps } from './Modal/Modal';
+export type { TooltipProps, TooltipVariant } from './Tooltip/Tooltip';
 export type { AlertProps } from './Alert/Alert';
 export type { CardProps } from './Card/Card';
 export type { BadgeProps } from './Badge/Badge';

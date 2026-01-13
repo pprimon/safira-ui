@@ -168,7 +168,6 @@ safira-ui/
 │   │   ├── theme.ts         # Tema MUI customizado
 │   │   └── ThemeProvider.tsx
 │   └── types/               # Tipos TypeScript compartilhados
-├── stories/                 # Stories do Storybook
 ├── jest.config.js           # Configuração do Jest
 ├── vite.config.ts           # Configuração do Vite
 └── package.json

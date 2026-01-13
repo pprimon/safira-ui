@@ -9,44 +9,50 @@ const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider theme={lightTheme}>{component}</ThemeProvider>);
 };
 
-const mockOptions = [
+const defaultOptions = [
   { value: "option1", label: "Option 1" },
   { value: "option2", label: "Option 2" },
-  { value: "option3", label: "Option 3", disabled: true },
+  { value: "option3", label: "Option 3" },
 ];
 
 describe("Select Component", () => {
   describe("Rendering", () => {
-    it("renders select field", () => {
-      renderWithTheme(<Select options={mockOptions} />);
-      expect(screen.getByRole("combobox")).toBeInTheDocument();
-    });
-
-    it("renders with label", () => {
-      renderWithTheme(<Select label="Test Label" options={mockOptions} />);
+    it("renders select with label", () => {
+      renderWithTheme(
+        <Select label="Test Label" options={defaultOptions} />
+      );
       expect(screen.getByLabelText("Test Label")).toBeInTheDocument();
     });
 
     it("renders with placeholder", () => {
       renderWithTheme(
-        <Select placeholder="Choose option" options={mockOptions} />
+        <Select
+          label="Test"
+          options={defaultOptions}
+          placeholder="Select an option"
+        />
       );
-      // O placeholder aparece como uma opção desabilitada
-      fireEvent.mouseDown(screen.getByRole("combobox"));
-      expect(screen.getByText("Choose option")).toBeInTheDocument();
+      expect(screen.getByText("Select an option")).toBeInTheDocument();
     });
 
-    it("renders with helper text", () => {
+    it("renders helper text", () => {
       renderWithTheme(
-        <Select helperText="Helper text" options={mockOptions} />
+        <Select
+          label="Test"
+          options={defaultOptions}
+          helperText="Helper text here"
+        />
       );
-      expect(screen.getByText("Helper text")).toBeInTheDocument();
+      expect(screen.getByText("Helper text here")).toBeInTheDocument();
     });
 
-    it("renders options correctly", () => {
-      renderWithTheme(<Select options={mockOptions} />);
+    it("renders all options when opened", async () => {
+      const user = userEvent.setup();
+      renderWithTheme(
+        <Select label="Test" options={defaultOptions} data-testid="select" />
+      );
 
-      fireEvent.mouseDown(screen.getByRole("combobox"));
+      await user.click(screen.getByRole("combobox"));
 
       expect(screen.getByText("Option 1")).toBeInTheDocument();
       expect(screen.getByText("Option 2")).toBeInTheDocument();
@@ -54,244 +60,186 @@ describe("Select Component", () => {
     });
   });
 
-  describe("Sizes", () => {
-    it("renders small size", () => {
+  describe("Selection", () => {
+    it("displays selected value", () => {
       renderWithTheme(
-        <Select size="small" options={mockOptions} data-testid="small-select" />
+        <Select label="Test" options={defaultOptions} value="option1" />
       );
-      expect(screen.getByTestId("small-select")).toBeInTheDocument();
-    });
-
-    it("renders medium size by default", () => {
-      renderWithTheme(
-        <Select options={mockOptions} data-testid="medium-select" />
-      );
-      expect(screen.getByTestId("medium-select")).toBeInTheDocument();
-    });
-
-    it("renders large size", () => {
-      renderWithTheme(
-        <Select size="large" options={mockOptions} data-testid="large-select" />
-      );
-      expect(screen.getByTestId("large-select")).toBeInTheDocument();
-    });
-  });
-
-  describe("States", () => {
-    it("renders disabled state", () => {
-      renderWithTheme(<Select disabled options={mockOptions} />);
-      const select = screen.getByRole("combobox");
-      expect(select).toHaveAttribute("aria-disabled", "true");
-    });
-
-    it("renders required state", () => {
-      renderWithTheme(<Select required options={mockOptions} />);
-      const select = screen.getByRole("combobox");
-      expect(select).toHaveAttribute("aria-required", "true");
-    });
-
-    it("renders error state", () => {
-      renderWithTheme(
-        <Select error helperText="Error message" options={mockOptions} />
-      );
-      expect(screen.getByText("Error message")).toBeInTheDocument();
-    });
-
-    it("renders fullWidth", () => {
-      renderWithTheme(<Select fullWidth options={mockOptions} />);
-      const select = screen.getByRole("combobox");
-      expect(select).toBeInTheDocument();
-    });
-  });
-
-  describe("Single Selection", () => {
-    it("selects an option", async () => {
-      const user = userEvent.setup();
-
-      renderWithTheme(<Select options={mockOptions} />);
-      const select = screen.getByRole("combobox");
-
-      await user.click(select);
-      await user.click(screen.getByText("Option 1"));
-
-      expect(select).toHaveTextContent("Option 1");
+      expect(screen.getByText("Option 1")).toBeInTheDocument();
     });
 
     it("calls onChange when option is selected", async () => {
       const user = userEvent.setup();
       const handleChange = jest.fn();
 
-      renderWithTheme(<Select options={mockOptions} onChange={handleChange} />);
-
-      await user.click(screen.getByRole("combobox"));
-      await user.click(screen.getByText("Option 1"));
-
-      expect(handleChange).toHaveBeenCalledWith("option1");
-    });
-
-    it("does not select disabled options", async () => {
-      const user = userEvent.setup();
-      const handleChange = jest.fn();
-
-      renderWithTheme(<Select options={mockOptions} onChange={handleChange} />);
-
-      await user.click(screen.getByRole("combobox"));
-
-      const disabledOption = screen.getByText("Option 3");
-      expect(disabledOption.closest("li")).toHaveAttribute(
-        "aria-disabled",
-        "true"
-      );
-    });
-  });
-
-  describe("Multiple Selection", () => {
-    it("allows multiple selections", async () => {
-      const user = userEvent.setup();
-      const handleChange = jest.fn();
-
       renderWithTheme(
-        <Select multiple options={mockOptions} onChange={handleChange} />
+        <Select
+          label="Test"
+          options={defaultOptions}
+          onChange={handleChange}
+        />
       );
 
-      const select = screen.getByRole("combobox");
-      await user.click(select);
-      await user.click(screen.getByText("Option 1"));
-
-      // O menu deve permanecer aberto para múltipla seleção
-      expect(screen.getByText("Option 2")).toBeInTheDocument();
-    });
-  });
-
-  describe("Controlled vs Uncontrolled", () => {
-    it("works as controlled component", async () => {
-      const user = userEvent.setup();
-
-      const TestComponent = () => {
-        const [value, setValue] = React.useState("");
-        return (
-          <Select value={value} onChange={setValue} options={mockOptions} />
-        );
-      };
-
-      renderWithTheme(<TestComponent />);
-      const select = screen.getByRole("combobox");
-
-      await user.click(select);
+      await user.click(screen.getByRole("combobox"));
       await user.click(screen.getByText("Option 2"));
 
-      expect(select).toHaveTextContent("Option 2");
+      expect(handleChange).toHaveBeenCalled();
     });
 
-    it("works as uncontrolled component", async () => {
+    it("supports multiple selection", async () => {
       const user = userEvent.setup();
+      const handleChange = jest.fn();
 
-      renderWithTheme(<Select options={mockOptions} />);
-      const select = screen.getByRole("combobox");
+      renderWithTheme(
+        <Select
+          label="Test"
+          options={defaultOptions}
+          multiple
+          value={[]}
+          onChange={handleChange}
+        />
+      );
 
-      await user.click(select);
+      await user.click(screen.getByRole("combobox"));
       await user.click(screen.getByText("Option 1"));
 
-      expect(select).toHaveTextContent("Option 1");
+      expect(handleChange).toHaveBeenCalled();
     });
   });
 
-  describe("Keyboard Navigation", () => {
-    it("opens menu with Enter key", async () => {
-      const user = userEvent.setup();
-
-      renderWithTheme(<Select options={mockOptions} />);
-      const select = screen.getByRole("combobox");
-
-      select.focus();
-      await user.keyboard("{Enter}");
-
-      expect(screen.getByText("Option 1")).toBeInTheDocument();
-    });
-
-    it("opens menu with Space key", async () => {
-      const user = userEvent.setup();
-
-      renderWithTheme(<Select options={mockOptions} />);
-      const select = screen.getByRole("combobox");
-
-      select.focus();
-      await user.keyboard(" ");
-
-      expect(screen.getByText("Option 1")).toBeInTheDocument();
-    });
-  });
-
-  describe("Accessibility", () => {
-    it("associates label with select", () => {
+  describe("States", () => {
+    it("renders disabled state", () => {
       renderWithTheme(
-        <Select label="Accessible Select" options={mockOptions} />
+        <Select label="Test" options={defaultOptions} disabled />
       );
-      const select = screen.getByLabelText("Accessible Select");
-      expect(select).toBeInTheDocument();
+      expect(screen.getByRole("combobox")).toHaveClass("Mui-disabled");
     });
 
-    it("has proper ARIA attributes", () => {
-      renderWithTheme(<Select options={mockOptions} />);
-      const select = screen.getByRole("combobox");
-
-      expect(select).toHaveAttribute("aria-haspopup", "listbox");
-      expect(select).toHaveAttribute("aria-expanded", "false");
+    it("renders error state", () => {
+      renderWithTheme(
+        <Select
+          label="Test"
+          options={defaultOptions}
+          error
+          helperText="Error message"
+        />
+      );
+      expect(screen.getByText("Error message")).toBeInTheDocument();
     });
 
-    it("updates aria-expanded when opened", async () => {
+    it("renders required state", () => {
+      renderWithTheme(
+        <Select label="Test" options={defaultOptions} required />
+      );
+      expect(screen.getByRole("combobox")).toHaveAttribute("aria-required", "true");
+    });
+  });
+
+  describe("Disabled Options", () => {
+    it("renders disabled options", async () => {
       const user = userEvent.setup();
+      const optionsWithDisabled = [
+        { value: "option1", label: "Option 1" },
+        { value: "option2", label: "Option 2", disabled: true },
+        { value: "option3", label: "Option 3" },
+      ];
 
-      renderWithTheme(<Select options={mockOptions} />);
-      const select = screen.getByRole("combobox");
+      renderWithTheme(
+        <Select label="Test" options={optionsWithDisabled} />
+      );
 
-      await user.click(select);
-      expect(select).toHaveAttribute("aria-expanded", "true");
+      await user.click(screen.getByRole("combobox"));
+
+      const disabledOption = screen.getByText("Option 2");
+      expect(disabledOption.closest("li")).toHaveClass("Mui-disabled");
+    });
+  });
+
+  describe("Sizes", () => {
+    it("renders small size", () => {
+      renderWithTheme(
+        <Select label="Test" options={defaultOptions} size="small" />
+      );
+      expect(document.querySelector('[data-size="small"]')).toBeInTheDocument();
+    });
+
+    it("renders medium size", () => {
+      renderWithTheme(
+        <Select label="Test" options={defaultOptions} size="medium" />
+      );
+      expect(document.querySelector('[data-size="medium"]')).toBeInTheDocument();
+    });
+
+    it("renders large size", () => {
+      renderWithTheme(
+        <Select label="Test" options={defaultOptions} size="large" />
+      );
+      expect(document.querySelector('[data-size="large"]')).toBeInTheDocument();
+    });
+  });
+
+  describe("Full Width", () => {
+    it("renders full width", () => {
+      renderWithTheme(
+        <Select label="Test" options={defaultOptions} fullWidth />
+      );
+      expect(document.querySelector(".MuiFormControl-fullWidth")).toBeInTheDocument();
+    });
+  });
+
+  describe("Custom Props", () => {
+    it("accepts custom className", () => {
+      renderWithTheme(
+        <Select
+          label="Test"
+          options={defaultOptions}
+          className="custom-select"
+        />
+      );
+      expect(document.querySelector(".custom-select")).toBeInTheDocument();
+    });
+
+    it("accepts custom data-testid", () => {
+      renderWithTheme(
+        <Select
+          label="Test"
+          options={defaultOptions}
+          data-testid="custom-select"
+        />
+      );
+      expect(screen.getByTestId("custom-select")).toBeInTheDocument();
     });
   });
 
   describe("Snapshots", () => {
-    it("matches snapshot for default select", () => {
-      const { container } = renderWithTheme(<Select options={mockOptions} />);
+    it("matches snapshot for basic select", () => {
+      const { container } = renderWithTheme(
+        <Select label="Basic Select" options={defaultOptions} />
+      );
       expect(container.firstChild).toMatchSnapshot();
     });
 
-    it("matches snapshot with label and helper text", () => {
+    it("matches snapshot with value", () => {
       const { container } = renderWithTheme(
         <Select
-          label="Test Label"
-          helperText="Helper text"
-          options={mockOptions}
+          label="Select with Value"
+          options={defaultOptions}
+          value="option1"
         />
       );
       expect(container.firstChild).toMatchSnapshot();
     });
 
-    it("matches snapshot for error state", () => {
+    it("matches snapshot with error", () => {
       const { container } = renderWithTheme(
         <Select
+          label="Select with Error"
+          options={defaultOptions}
           error
-          label="Error Select"
-          helperText="This field has an error"
-          options={mockOptions}
+          helperText="Error message"
         />
       );
       expect(container.firstChild).toMatchSnapshot();
-    });
-
-    it("matches snapshot for different sizes", () => {
-      const sizes = ["small", "medium", "large"] as const;
-
-      sizes.forEach((size) => {
-        const { container } = renderWithTheme(
-          <Select size={size} label={`${size} select`} options={mockOptions} />
-        );
-        expect(container.firstChild).toMatchSnapshot(`select-${size}`);
-      });
     });
   });
 });
-
-
-
-

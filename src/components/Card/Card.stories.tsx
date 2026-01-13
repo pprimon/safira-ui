@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 // Mock function for actions
 const fn = () => () => {};
-import { Card } from "../src/components/Card/Card";
-import { Button } from "../src/components/Button/Button";
+import { Card } from "./Card";
+import { Button } from "../Button/Button";
 import { Avatar, IconButton } from "@mui/material";
 import { MoreVert, Favorite, Share, Settings } from "@mui/icons-material";
 
