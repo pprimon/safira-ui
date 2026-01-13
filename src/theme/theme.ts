@@ -4,6 +4,7 @@ import { getAlertThemeOverrides } from "../components/Alert/Alert.theme";
 import { getBadgeThemeOverrides } from "../components/Badge/Badge.theme";
 import { getButtonThemeOverrides } from "../components/Button/Button.theme";
 import { getCardThemeOverrides } from "../components/Card/Card.theme";
+import { getInputThemeOverrides } from "../components/Input/Input.theme";
 
 
 export const designTokens = {
@@ -87,12 +88,14 @@ const getComponentOverrides = (theme: Theme, mode: "light" | "dark"): ThemeOptio
   const badgeOverrides = getBadgeThemeOverrides(theme, mode);
   const buttonOverrides = getButtonThemeOverrides(theme, mode);
   const cardOverrides = getCardThemeOverrides(theme, mode);
+  const inputOverrides = getInputThemeOverrides(theme, mode);
 
   return {
     ...alertOverrides,
     ...badgeOverrides,
     ...buttonOverrides,
     ...cardOverrides,
+    ...inputOverrides,
     MuiPaper: {
       styleOverrides: {
         root: {

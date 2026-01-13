@@ -1,15 +1,7 @@
 import React, { forwardRef } from "react";
-import { TextField, InputAdornment, FormHelperText } from "@mui/material";
+import { TextField, InputAdornment } from "@mui/material";
 import type { TextFieldProps } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import type { BaseComponentProps, SizeProps, DisabledProps } from "../../types";
-import {
-  colors,
-  borderRadius,
-  spacing,
-  shadows,
-  transitions,
-} from "../../theme";
 
 export interface InputProps
   extends BaseComponentProps,
@@ -74,131 +66,6 @@ export interface InputProps
   maxLength?: number;
 }
 
-const StyledTextField = styled(TextField, {
-  shouldForwardProp: (prop) => !["size"].includes(prop as string),
-})<{ size?: "small" | "medium" | "large" }>(
-  ({ theme, size = "medium", error }) => {
-    const sizeStyles = {
-      small: {
-        "& .MuiInputBase-root": {
-          height: "36px",
-          fontSize: "0.875rem",
-        },
-        "& .MuiInputLabel-root": {
-          fontSize: "0.875rem",
-        },
-      },
-      medium: {
-        "& .MuiInputBase-root": {
-          height: "44px",
-          fontSize: "1rem",
-        },
-        "& .MuiInputLabel-root": {
-          fontSize: "1rem",
-        },
-      },
-      large: {
-        "& .MuiInputBase-root": {
-          height: "52px",
-          fontSize: "1.125rem",
-        },
-        "& .MuiInputLabel-root": {
-          fontSize: "1.125rem",
-        },
-      },
-    };
-
-    return {
-      "& .MuiInputLabel-root": {
-        color: colors.text.secondary,
-        fontWeight: 500,
-        fontSize: "0.875rem",
-        "&.Mui-focused": {
-          color: colors.primary.main,
-          fontWeight: 600,
-        },
-        "&.Mui-error": {
-          color: colors.error.main,
-        },
-      },
-      "& .MuiOutlinedInput-root": {
-        borderRadius: borderRadius.xl,
-        backgroundColor: colors.surface.light,
-        transition: `all ${transitions.duration.shorter}ms ${transitions.easing.easeInOut}`,
-        "& fieldset": {
-          borderColor: "transparent",
-          borderWidth: "2px",
-        },
-        "&:hover": {
-          backgroundColor: "#FFFFFF",
-          transform: "translateY(-1px)",
-          boxShadow: shadows.sm,
-          "& fieldset": {
-            borderColor: colors.primary.light,
-          },
-        },
-        "&.Mui-focused": {
-          backgroundColor: "#FFFFFF",
-          transform: "translateY(-1px)",
-          boxShadow: error
-            ? `0 0 0 3px ${colors.error.main}25, ${shadows.md}`
-            : `0 0 0 3px ${colors.primary.main}25, ${shadows.md}`,
-          "& fieldset": {
-            borderColor: error ? colors.error.main : colors.primary.main,
-            borderWidth: "2px",
-          },
-        },
-        "&.Mui-error": {
-          backgroundColor: colors.error.light + "10",
-          "& fieldset": {
-            borderColor: colors.error.light,
-          },
-          "&:hover": {
-            backgroundColor: colors.error.light + "15",
-            "& fieldset": {
-              borderColor: colors.error.main,
-            },
-          },
-          "&.Mui-focused": {
-            backgroundColor: "#FFFFFF",
-            boxShadow: `0 0 0 3px ${colors.error.main}25, ${shadows.md}`,
-            "& fieldset": {
-              borderColor: colors.error.main,
-              borderWidth: "2px",
-            },
-          },
-        },
-        "&.Mui-disabled": {
-          backgroundColor: colors.surface.main,
-          opacity: 0.6,
-          "& fieldset": {
-            borderColor: "transparent",
-          },
-        },
-      },
-      "& .MuiInputBase-input": {
-        color: colors.text.primary,
-        "&::placeholder": {
-          color: colors.text.hint,
-          opacity: 1,
-        },
-      },
-      "& .MuiFormHelperText-root": {
-        marginLeft: spacing.sm,
-        marginTop: spacing.xs,
-        fontSize: "0.75rem",
-        fontWeight: 500,
-        color: colors.text.secondary,
-        "&.Mui-error": {
-          color: colors.error.main,
-          fontWeight: 600,
-        },
-      },
-      ...sizeStyles[size],
-    };
-  }
-);
-
 /**
  * Componente Input do Safira UI
  *
@@ -249,7 +116,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     return (
-      <StyledTextField
+      <TextField
         ref={ref}
         label={label}
         placeholder={placeholder}
@@ -263,9 +130,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         helperText={helperText}
         fullWidth={fullWidth}
         disabled={disabled}
-        size={size}
         variant="outlined"
         className={className}
+        data-size={size}
         inputProps={{
           "data-testid": dataTestId,
           maxLength,

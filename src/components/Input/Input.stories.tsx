@@ -1,13 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
-// Mock function for actions
-const fn = () => () => {};
-import { Input } from "../src/components/Input";
-import { Email, Search, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Input } from "./Input";
+import { Email, Search, Visibility, VisibilityOff } from "@mui/icons-material";
 
 const meta: Meta<typeof Input> = {
-  title: "Components/Input",
   component: Input,
+  title: "Components/Input",
   parameters: {
     layout: "centered",
     docs: {
@@ -30,40 +28,67 @@ const meta: Meta<typeof Input> = {
       control: { type: "select" },
       options: ["small", "medium", "large"],
       description: "Tamanho do input",
+      table: { category: "Aparência", defaultValue: { summary: "medium" } },
     },
     type: {
       control: { type: "select" },
       options: ["text", "email", "password", "number", "tel", "url", "search"],
       description: "Tipo do input HTML",
+      table: { category: "Comportamento", defaultValue: { summary: "text" } },
+    },
+    label: {
+      control: "text",
+      description: "Label do input",
+      table: { category: "Conteúdo" },
+    },
+    placeholder: {
+      control: "text",
+      description: "Texto de placeholder",
+      table: { category: "Conteúdo" },
+    },
+    helperText: {
+      control: "text",
+      description: "Texto de ajuda ou erro",
+      table: { category: "Conteúdo" },
     },
     disabled: {
       control: "boolean",
       description: "Se o input está desabilitado",
+      table: { category: "Estado", defaultValue: { summary: "false" } },
     },
     error: {
       control: "boolean",
       description: "Se o input tem erro",
+      table: { category: "Estado", defaultValue: { summary: "false" } },
     },
     required: {
       control: "boolean",
       description: "Se o input é obrigatório",
+      table: { category: "Comportamento", defaultValue: { summary: "false" } },
     },
     fullWidth: {
       control: "boolean",
       description: "Se o input deve ocupar toda a largura",
+      table: { category: "Aparência", defaultValue: { summary: "false" } },
     },
   },
   args: {
-    onChange: fn(),
-    onFocus: fn(),
-    onBlur: fn(),
+    label: "Nome",
+    placeholder: "Digite seu nome",
+    size: "medium",
+    type: "text",
+    disabled: false,
+    error: false,
+    required: false,
+    fullWidth: false,
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
+  name: "Padrão",
   args: {
     label: "Nome",
     placeholder: "Digite seu nome",
@@ -71,6 +96,7 @@ export const Default: Story = {
 };
 
 export const WithValue: Story = {
+  name: "Com Valor",
   args: {
     label: "Email",
     value: "usuario@exemplo.com",
@@ -79,6 +105,7 @@ export const WithValue: Story = {
 };
 
 export const WithError: Story = {
+  name: "Com Erro",
   args: {
     label: "Email",
     value: "email-invalido",
@@ -89,6 +116,7 @@ export const WithError: Story = {
 };
 
 export const WithIcons: Story = {
+  name: "Com Ícones",
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       <Input
@@ -108,6 +136,7 @@ export const WithIcons: Story = {
 };
 
 export const Sizes: Story = {
+  name: "Tamanhos",
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       <Input label="Pequeno" placeholder="Input pequeno" size="small" />
@@ -118,6 +147,7 @@ export const Sizes: Story = {
 };
 
 export const States: Story = {
+  name: "Estados",
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       <Input label="Normal" placeholder="Estado normal" />
@@ -134,7 +164,8 @@ export const States: Story = {
 };
 
 export const PasswordInput: Story = {
-  render: () => {
+  name: "Senha",
+  render: function PasswordStory() {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -161,6 +192,7 @@ export const PasswordInput: Story = {
 };
 
 export const Required: Story = {
+  name: "Obrigatório",
   args: {
     label: "Nome Completo",
     placeholder: "Digite seu nome completo",
@@ -170,6 +202,7 @@ export const Required: Story = {
 };
 
 export const WithMaxLength: Story = {
+  name: "Com Limite de Caracteres",
   args: {
     label: "Bio",
     placeholder: "Conte um pouco sobre você",
@@ -177,3 +210,19 @@ export const WithMaxLength: Story = {
     helperText: "Máximo de 100 caracteres",
   },
 };
+
+export const AllTypes: Story = {
+  name: "Todos os Tipos",
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <Input label="Texto" type="text" placeholder="Digite texto..." />
+      <Input label="Email" type="email" placeholder="seu@email.com" />
+      <Input label="Senha" type="password" placeholder="••••••••" />
+      <Input label="Número" type="number" placeholder="123" />
+      <Input label="Telefone" type="tel" placeholder="(11) 99999-9999" />
+      <Input label="URL" type="url" placeholder="https://exemplo.com" />
+      <Input label="Busca" type="search" placeholder="Pesquisar..." />
+    </div>
+  ),
+};
+
